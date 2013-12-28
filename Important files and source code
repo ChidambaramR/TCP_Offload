@@ -1,0 +1,78 @@
+SKB LIST HANDLING
+	http://vger.kernel.org/~davem/skb_list.html
+
+SKB GENERAL WORKING
+	http://vger.kernel.org/~davem/skb.html
+
+SKB SOCKET ACCOUNTING
+	http://vger.kernel.org/~davem/skb_sk.html
+
+SKB DATA HANDLING
+	http://vger.kernel.org/~davem/skb_data.html
+
+
+CHECKSUMMING
+http://lxr.free-electrons.com/source/drivers/net/ethernet/intel/e1000/e1000_main.c#L3974
+
+Ref: http://vger.kernel.org/~davem/skb.html
+e1000_rx_checksum
+1. ip_summed - describes what kind of assistance the card has provided for a received packet. 
+
+2. csum - 
+	a. OUTPUT - This field holds the checksum of the packet. When building the send packets, we copy the data from the userspace and calculate the 16 bit 2's complement sum in parallel. This sum is accumulated in skb->csum field. This helps us compute the final checksum stored in the protocol packet header checksum field. This field can be IGNORED if the device will calculate the checksum for us. 
+	b. INPUT - On input, this field can be used to store a checksum calculated by the device. If the device indicates CHECKSUM_HW in the SKB 'ip_summed' field, this means that 'csum' is the two's complement checksum of the entire packet data area starting at 'skb->data'. 
+
+3. CHECKSUM_NONE - Initially the driver assumes that the card has provided no checksum assistance. 
+CHECKSUM_UNNECESSARY - It is not necessary to verify the checksum of the packet. Usually occurs when the packet is received over the loopback device. This can also be used when the device only provides a 'CHECKSUM OK' indication for receive packet checksum offload. 
+
+4. CHECKSUM COMPUTATION BY STACK
+	skb->csum = csum_and_copy_from_user(user_pointer, data,
+					    user_data_len, 0, &err);
+
+5. Packet reception
+	http://www.makelinux.net/ldd3/chp-17-sect-6
+
+6. Overview of checksumming from Understanding Linux network Internals
+	RECEIVE - When a packet is received, skb->csum may hold its L4 checksum. skb->ip_summed field keeps track of status of L4 checksum. skb->ip_summed may take following values.
+	CHECKSUM_NONE
+	a. Checksum in csum field is not valid because 
+		(i). The device did not provide checksum assistance.
+		(ii). The device computed the checksum but it found to be corrupt. The device driver could discard the frame directly. Instead it sets the ip_summed field to CHECKSUM_NONE and let the system software verify and compute the checksum again. This is because, if the input frames are to forwarded the router should not discard it due to a wrong L4 checksum as a router is not supposed to look at the checksum. It will be upto the destination host to do it. 
+		(iii). The checksum needs to be recomputed and reverified.
+
+	b. CHECKSUM_HW
+		The NIC has computed the checksum on the L4 header and payload and has copied it into the skb->csum field. The software needs to only add the checksum on the pseudoheader to skb->csum and to verify the resulting checksum.
+
+	c. CHECKSUM_UNNECESSARY
+		NIC has computed and verified checksum on the L4 header and checksum, as well as on the pseudoheader. This can also be set when the probability of error on the packet is very low and would be a waste of time and CPU power to compute and verify the L4 checksum. Eg: loopback.
+
+	SEND
+	When sending, csum represents a pointer to the place inside the buffer where the hardware card has to put the checksum it will compute, NOT the checksum itself. This field is therefore used in packet transmission only if the checksum is calculated in the hardware.
+As in the case of reception, ip_summed represents the status of L4 checksum. The field is used by the L4 protocols to tell the device whether it needs to take care of the checksumming. ip_summed does not use CHECKSUM_UNNECESSARY when transmitting packets.
+	CHECKSUM_NONE
+		The protocol has stored into its header the checksum on the pseudoheader only. The device is supposed to complete it by adding the checksum on the L4 header and payload.
+
+When the feature flas, NETIF_F_XXX_CSUM are initialized by the device driver when the NIC is enabled, the CHECKSUM_XXX flags have to be set for every sk_buff buffer that is received or transmitted. At the receive time, it is the device driver that initializes ip_summed correctly based on the NETIF_F_XXX_CSUM device capablities.
+
+
+7. DESCRIPTION OF HOW PACKET IS PROCESSED IN KERNEL WRTO CHECKSUM
+	http://oss.sgi.com/archives/netdev/2003-11/msg00811.html
+
+8. DESCRIPTION OF PSEUDO HEADERS
+	Src: www.tcpipguide.com/free/t_TCPChecksumCalculationandtheTCPPseudoHeader-2.htm
+
+	Instead of just calculating the checksum over the TCP data segment, a 12byte (96 bit) TCP pseudo header is created prior to checksum calculation. The pseudo header contains important fields taken from the IP header and TCP as well. It contains IP SRC, IP DST, RESERVED, PROTOCOL, TCP LENGTH. Once this header is formed, it is placed in a buffer, following which the TCP segment itself is placed. The checksum is then calculated over the entire set of data. This value is placed into the checksum field of the TCP header and the pseudo header is discarded and it is NOT an actual part of the TCP segment and is not transmitted.
+	NOTE: The checksum field is itself part of the TCP header and thus one of the fields over which checksum is calculated which is a "chicken and egg" problem. So it is initally filled with 0's.
+	When a TCP segment is received, the receiving TCP software also does the same calculation. It forms the pseudo header, preprends to the actual TCP segment and then performs the checksum calculation ( setting the checksum field 0 as before ), if there is a difference between its calculation and the value the source device put in the Checksum field, this indicates there is some error and the packet is discarded. 
+
+9. TCP OFFLOAD
+	XsumRX
+	------
+	(This parameter is NOT supported on the 82542-based adapter.)
+	Valid Range:   0-1
+	Default Value: 1
+
+	A value of '1' indicates that the driver should enable IP 		checksum offload for received packets (both UDP and TCP) to the adapter hardware.
+
+10. Reference NIC walkthrough
+	https://github.com/Caustic/netfpga-wiki/wiki/ReferenceNICWalkthrough

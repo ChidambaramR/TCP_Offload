@@ -25,4 +25,44 @@ In another implementation, an ASIC is used, where TCP/IP processing is offloaded
 
 Hybrid Implementation:
 =======================
-There are implementations which take advantage of both.   
+There are implementations which take advantage of both. 
+
+
+Offloading in TCP:
+==================
+	In places where a TCP session is expected to be up for a long time, the main overhead is the data transmission and reception. The offloading of this type is "data path" offloading. It eliminates TCP/IP overhead in data transmission/reception. The host stack just maintains reponsibilities for other jobs like connection establishment, closing and error handling.
+
+Full offloading means, all the handling is done in the TCP stack in the hardware. Even the connection management tasks is taken from the host processor. In places where connections are frequently expected to go down and come up, full TCP offloading is of big advantage. 
+
+Performance metrics:
+=====================
+	Advantages of TOE can be measured through throughput, CPU utilization and latency. 
+The important measure is the amount of data moved from network buffer to user buffer and back and the number of transactions to move the data. TOE interfaces to the system above the transport layer with a session layer interface. The main advantage is that applications typically read and write in large blocks. In this case, the work load on the host processor is drastically reduced. 
+
+How is data moved between application buffers and TOE buffers:
+===============================================================
+The data is moved to and from application buffers by hardware DMA engine. 
+  
+Challenges:
+===========
+	No standard driver interface for major OS and TOE adaptors. 
+	Drivers for TOE are interfacing to OS in proprietary ways.
+	It is expensive.
+
+Main advantages:
+================
+	It frees up the host CPU by doing all the work being done in the TCP/IP stack in the TOE. 
+	It saves some data transfers since the cards act on the dayta locally.
+	All the host processor needs to do is to open the connection and the TCP Offload Engine ( TOE ) on the NIC and it will take from there.
+
+Path of Data in TOE:
+=====================
+	It is a process-process layer. Data passed to the TCP Offload enginer comes straight from the application process and thedata delivered from the TOE is ready to be passed to the application process. 
+	Direct Data Placement (DDP): Addresses the memory bottleneck problem on receive.
+	Direct Data Sourcing (DDS): Addresses the memory bottleneck problem on send.
+	CRC Offload: Application layer data integrity check. 
+
+
+Checksumming:
+==============
+	While a device initializes, it is assigned with several pre-allocated sk-buffs. There is a packet descriptor associated with each sk-buff. To be able to receive a packet, the descriptor should be in ready state which means that the sk_buff has already been memory-mapped into the address space accessible by NIC. When a packet actually arrives, one of these packet descriptors will be used and the packet will be transferred by DMA into the pre-allocated sk_buff.

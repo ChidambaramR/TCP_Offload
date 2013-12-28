@@ -1,0 +1,104 @@
+Questions need to ask:
+	Offload features. What features specifically. Something i saw in the net are Checksum offloading, TCP offloading, FCoE offloading.
+
+
+LRO
+
+Large Receive Offload (LRO) is a technique for increasing inbound throughput of high-bandwidth network connections by reducing CPU overhead. It works by aggregating multiple incoming packets from a single stream into a larger buffer before they are passed higher up the networking stack, thus reducing the number of packets that have to be processed. LRO combines multiple Ethernet frames into a single receive in the stack, thereby potentially decreasing CPU utilization for receives. 
+
+Important source files
+	linux/drivers/net/e1000/e1000_param.c Line No 347
+
+most recent stable version of the e1000 driver for Linux,
+version 7.6.9.2
+
+
+#define OPTION_UNSET   -1
+static int XsumRX = OPTION_UNSET;
+
+Important field's description
+http://downloadmirror.intel.com/20927/eng/e1000.htm#e1000_driver
+
+Source file for LRO
+http://lwn.net/Articles/243949/
+
+Good link about changing segmentation offload features in linux
+http://sandilands.info/sgordon/segmentation-offloading-with-wireshark-and-ethtool
+
+Where to find info about TSO in linux
+TCP Segmentation Offload is supported in Linux by the network device layer. A driver that wants to offer TSO needs to set the NETIF_F_TSO bit in the network device structure. In order for a device to support TSO, it needs to also support Net:TCP checksum offloading and Net:Scatter Gather.
+
+The driver will then receive super-sized skb's. These are indicated to the driver by skb_shinfo(skb)->gso_size being non-zero. The gso_size is the size the hardware should fragment the TCP data. TSO may change how and when TCP decides to send data. 
+
+
+Other good features in E1000
+descriptor alignment to cache lines,
+jumbo frames,
+
+Possible Offload Features in E1000
+Ref: http://landley.net/kdocs/ols/2005/ols2005v2-pages-141-148.pdf 
+1. Interrupt moderation
+2. buffer coalescing
+3. Checksuming for TCP and IP
+	IP checksuming did not help well because it was only a checksum across twenty bytes of IP header. But TCP segmentation was really helpful. Only required a little change in the stacks to work. 
+4. TCP Segmentation offload
+5. UDP fragment checksums
+	Required no change in the stack. Little used due to the lack of use of UDP checksumming.
+6. Intel I/O Acceleration Technology
+	It achieves benefits of TOE without any of the associated disadvantages. 
+7. Receive side scaling, Packet spilt, Chipset DMA
+	RSS - Identifies TCP flows and passes this information to driver via a hash value. This allows packets associated with a particular flow to be placed onto a certain queue for processing. The feature also includes multiple receive queues which are used to distribute the packet processing onto multiple CPUs.
+	Packet Split - Splits the protocol header in a packet from the payload data and places into different buffers. This allows payload data buffers to be page aligned and for the protocol headers to be placed in small buffers which can be easily cached and hence preventing cache trash. All of these features are designed to reduce or eliminate the need for TOE. The I/OAT features will scale with processors and chipset technologies. 
+8. NAPI 
+	Reduces the number of interrupts taken. 
+9. Receive Side Coalescing
+	This allows the NIC's to identify packets that belong to same TCP/IP flows and coalesce them into a single large packet. As a result TCP/IP stack has to process fewer packets reducing per packet processing costs. NIC can do this coalescing during the interrupt moderation time and hence packet latency is not affected. i.e It combines incoming packets of the same TCP connection into larger packets thus reducing the number of packets that software has to process.
+10. Large Segment Offload
+	This has resulted in reduced transmit side processing. 
+11. Zero copy transmit
+	Reduces transmit side processing.
+
+TCP Segmentation Offload
+	TCP segmentation offload (TSO) allows the OS to pass a buffer larger than the connection’s Maximum Transmission Unit (MTU) size to the network controller. The controller then segments the buffer into individual Ethernet packets, attaches the proper protocol headers, and transmits.  Without TSO, each MTU-sized data buffer must be passed to the controller individually, which is more CPU-intensive.
+	The data to be transmitted need not even be touched by the CPU, allowing zero-copy operation. Using the sendfile() interface, the kernel does not need to copy the user data into networking buffers, but can point to pages pinned in the page cache as the source of the data. This also does not pollute the CPU cache with data that is not likely to be used again, and lowers the CPU cycles needed to send a packet.
+
+I/OAT
+Ref: http://www.linuxfoundation.org/collaborate/workgroups/networking/i/oat
+	I/OAT (I/O Acceleration Technology) is the name for a collection of techniques by Intel to improve network throughput. The most significant of these is the DMA engine. The DMA engine is meant to offload from the CPU the copying of SKB data to the user buffers. This is not a zero-copy receive, but does allow the CPU to do other work while the copy operations are performed by the DMA engine. 
+Ref: https://www.kernel.org/doc/ols/2005/ols2005v1-pages-289-296.pdf
+	Split Headers: In a packet several headers are attached like TCP header, IP header etc. When such a packet is received, at minimum the network controller must only examine the ethernet header and all rest of the packet can be treated as opaque data. Thus when a controller DMA transfers a received packet into a buffer, it typically transfers the TCP/IP and Ethernet headers along with the actual application data into a single buffer. Wih this split header capability, controller can partition the packet between the headers and the data and copy these into two separate buffers. Adv 1. It allows both header and data to be optimally aligned. Adv 2. It allows the network data buffer to consist of small slab-allocated header buffer plus a larger, page-allocated data buffer. Supports results in better cache utilization by not polluting the CPU's cache. 
+	Multiple Receive Queues: Receiving many small packets requires additional processing. On a system with many CPU's this may limit throughput. Multiple receive queues allow network processors to be distributed among more than one CPU. The queue for a given packet is chosen by computing a hash of certain fields in the protocol headers. This results in all packets for a single TCP stream being placed on the same queue. The ISR uses a function smp_call_async_mask() to send IPI's to two CPU's that have been configured. 
+	DMA Copy Offload Enginer: Most time during receive processing is spent copying the data. All cycles that are spent copying incoming packets are cycles that prevent the CPU from perfomring more demanding computations. I/OAT offloads this expensive data copy operation from the CPU with the addition of a DMA engine ( a dedicated device to do memory copies ). While DMA engine performs the data copy, the CPU is free to process the next packet. The I/OAT DMA engine was added specifically to benefit network intensive server loads, but its operation is not tightly coupled network subsystem. Each client requests a DMA channel from the DMA sub-system. If the DMA channel was not available, then the client has to fall back to non-copy offloading. 
+
+Packet Processing:
+Using this mechanism, processing by the CPU and DMA engine's data copies take in parallel. For a user buffer to be available for the early async copy to commence, the user process must make a buffer to be available prior to packet reception by using read(). If process is using select() or poll() to wait for data, user buffers are not available until data has already arrived. This reduces the parallelism possible. 
+1. tcp_recvmsg
+	This is called as a result of read. iovec is pinned in memory. This generates a list of pages that map to the iovec, which we save in secondary list called locked_list.
+2. The process sleeps
+3. Packets arrive
+	Interrupt is generated. NAPI polling starts and packets run up the net stack to tcp_v4_rcv()
+4. Copy to user buffer
+	Packet is placed on pre-queue so TCP processing is completed in the process context. tcp_prequeue tries doing fastpath processing on the packet and if successful starts the copying to the user buffer.  Eventhough it is executing from bottom half and is copying to the user buffer, it does not take a page fault because pages are pinned in the memory. 
+5. Process wakes up
+	Process checks the pre-queue for packets to process. For any packets with copied_early flag, fast path checks are skipped and ACK generation starts. 
+6. tcp_rcv_established
+	The skb is freed here. However DMA engine might still be copying data and it should wait for copy completion. So the skb is placed on another queue called the async_wait_queue. 
+7. dma_wait_for_completion
+	The process waits for the last cookie to be completed.
+8. iovec unpinned
+	The iovec is unpinned and its pages are marked dirty.
+9. skb free
+	All skb's in the async_wait_queue are free.
+10. The system call is completed
+
+
+
+
+Zero Copy
+	As network data is sent or received, you can easily imagine it being copied to/from the application into kernel memory and from there being copied to/from the card memory. All this data movement takes time and CPU resources. As hinted above in the Bus Master DMA section, a properly designed card can cut down on all this copying, and the most ideal case would be zero copy of course. With some of the modern PCI cards, zero copy is possible by simply pointing the card at the data and essentially saying "get it yourself." If maximum performance with minimum server load is important to you then check to see if your hardware and driver will support zero copy. 
+
+A good link for Receive side Scaling
+	https://www.kernel.org/doc/Documentation/networking/scaling.txt
+
+A good link for packet reception flow in LINUX
+	http://lss.fnal.gov/archive/2006/pub/fermilab-pub-06-432-cd.pdf

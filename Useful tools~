@@ -1,0 +1,9 @@
+Ethtool
+
+Ethtool -i eth0 - Overall details of the driver.
+Ethtool -S eth0 - Statistics of the driver
+Ethtool -k eth0 - Shows the offloading features of NIC.
+pktgen
+
+lspci - List all the PCI devices
+lshw - List all the hardware in the system
