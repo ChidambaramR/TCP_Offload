@@ -73,3 +73,6 @@ When the feature flas, NETIF_F_XXX_CSUM are initialized by the device driver whe
 	Default Value: 1
 
 	A value of '1' indicates that the driver should enable IP 		checksum offload for received packets (both UDP and TCP) to the adapter hardware.
+
+10. Reference NIC walkthrough
+	https://github.com/Caustic/netfpga-wiki/wiki/ReferenceNICWalkthrough

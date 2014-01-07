@@ -76,3 +76,6 @@ When the feature flas, NETIF_F_XXX_CSUM are initialized by the device driver whe
 
 10. Reference NIC walkthrough
 	https://github.com/Caustic/netfpga-wiki/wiki/ReferenceNICWalkthrough
+
+11. Register Map
+	https://github.com/Caustic/netfpga-wiki/wiki/RegisterMap

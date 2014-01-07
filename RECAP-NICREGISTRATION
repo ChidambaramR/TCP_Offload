@@ -1,0 +1,22 @@
+RECAP:
+	Each network device is represented in the Linux kernel as an instance of net_device data structure. 
+	The device drivers allocate the resources such as IRQ Line, I/O Ports and memory registration needed to establish device/kernel communication.
+	All devices interact with the kernel using one of these two ways. 1). Polling and 2). Interrupt
+
+	Every interrupt runs a function called interrupt handler which must be tailored to the device and therefore is installed by the device driver. Typically when a device driver registers a NIC, it requests and assigns an IRQ. (request_IRQ). Common interrupt types are Reception of a frame, Transmission failure, DMA transfer has completed, Device has enough memory to handle a new transmission. 
+	A device driver can also disable the egree queue before a transmission and re-enable it only if there is a free memory on the NIC. 
+	A driver ( eg: drivers/net/3c509.c installs as its hard_start_xmit function in its net_device structure as el3_start_xmit.
+	All interrupt IRQ line mappings are stored in irq_desc vector which is global. Mappings are defined in the irqaction data structures. 	
+	The request_irq is a wrapper around setup_irq which takes an irqaction structure as input and inserts it into the global_irq vecotr. 
+	The kernel function that handles interrupts and passes them to drivers is architecture dependent. It is called handle_IRQ_event on most architectures.
+	Fields of irq_action data structure:
+	Pointer to function which handles interrupts
+	1. void (*handler)(int irq, void *dev_id, struct pt_regs *regs)
+	2. flags
+	3. struct irqaction *next
+	4. char* name
+	
+
+INITIALIZATION OPTIONS
+	Module options:
+	Each module is assigned a directory in sys/module. The sub-directory /sys/modules/module/parameter holds a file for each parameter exported by the module. 
