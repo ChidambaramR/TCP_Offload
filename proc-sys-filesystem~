@@ -9,3 +9,13 @@
 	softnet_data - exports stats about interrupts used in the networking code. 
 
 /proc/pci - dump information about pci devices. 
+
+/proc/net - For each network device registered with the kernel, a few statistics about reception and transmission.
+
+/proc/wireless - Prints few paramters of the wireless device. 
+
+/proc/softnet_stat - Statistics about software interrupts
+
+/proc/sys/kernel - stats about kernel like bootloader type, version etc
+
+

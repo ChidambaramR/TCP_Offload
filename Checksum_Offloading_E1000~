@@ -1,0 +1,106 @@
+NET_DEVICE:
+------------
+The net_device->features field specify the capabilities of the device. 
+The flags used in controlling checksumming are
+NETIF_F_NO_CSUM - No need of checksum. In case of loopback device.
+	i.e the device is so reliable.
+
+NETIF_F_IP_CSUM - The device can compute the L4 checksum in hardware, 
+	but only for TCP and IP.
+
+NETIF_F_HW_CSUM - The device can computer L4 checksum for any protocol.
+
+It is redefined in the kernel as follows
+/* List of features with software fallbacks. */
+define NETIF_F_GEN_CSUM        NETIF_F_HW_CSUM
+define NETIF_F_V4_CSUM         (NETIF_F_GEN_CSUM | NETIF_F_IP_CSUM)
+define NETIF_F_V6_CSUM         (NETIF_F_GEN_CSUM | NETIF_F_IPV6_CSUM)
+define NETIF_F_ALL_CSUM        (NETIF_F_V4_CSUM | NETIF_F_V6_CSUM)
+
+All the features supported by net_device is listed in
+	include/linux/netdev_features.h
+
+SK_BUFF:
+---------
+There are two fields. skb->csum and skb->ip_summed which has different meanings depending on whether skb points to a receive packet or packet to be transmitted out. 
+
+When a packet is received, skb->csum may hold the L4 checksum. 
+skb->ip_summed field keeps track of the status of the L4 checksum. It is used by the device driver to inform the L4 layer. 
+
+Actual definitions of these found in /include/linux/skbuff.h
+
+CHECKSUM_NONE
+--------------
+	The checksum in csum is not vaild becuase
+	(i) The device does not provide hardware checksumming
+	(ii) The device computed the hardware checksum and found it to
+		be corrupted. The driver could discard the frame 			directly. But some DD's set the ip_summed to 			CHEKCSUM_NONE and let the stack do the computation.
+		This is done in e1000_rx_checksum. There is a reson
+		behind this. If this is a router, it should not discard
+		the packet as it is not supposed to look at the 
+		L4 details.
+CHECKSUM_HW
+------------
+	The NIC has computed the checksum on the L4 header and has copied it into the skb->csum field. The software only need to add the pseudo header to skb->csum and to verify the resulting checksum. 
+
+CHECKSUM_UNNECESSARY
+---------------------
+	NIC has computed and verified the checksum on the L4 header and checksum, as well as on the pseudoheader. So the software is relieved frm having to do any L4 checksum verification. Example is the loopback device. 
+
+When a packet is transmitted, csum represents a pointer to the place inside the buffer where the hardware card has to put the checksum it will compute, not the checksum itself. This field is therefore used during packet transmission only if the checksum is calculated in the hardware. 
+As in the case of packet reception, ip_summed represnts the status of the L4 checksum. It is used by L4 protocols to tell the device whether it needs to take care of the cheksumming in particular. 
+CHECKSUM_NONE
+--------------
+	The protocol has already taken care of the checksum. The device does not need to do anything. Thus no need to compute it. When ip_summed is set to CHECKSUM_NONE, csum is meaningless.
+
+CHEKCSUM_HW
+------------
+	The protocol has stored into its header the checksum on the pseudoheader only. The device is supposed to complete it by adding the checkum on the L4 header. 
+
+CHEKCSUM_UNNECESSARY
+---------------------
+	ip_summed does not use CHECKSUM_UNNECESSARY when transmitting packets.
+
+While the feature flags NETIF_F_XXX_CSUM are initialized by the device driver when the NIC is enabled, the CHECKSUM_XXX flags have to be set for every sk_buff buffer that is received or transmitted.
+
+At reception time, it is the device driver which initializes the ip_summed correctly based on the NETIF_F_XXX_CSUM capabilities.
+
+At transmission time, the L3 transmission API's initialize ip_summed based on the checksumming capabilites of the egress device, which can be obtained from the routing table which includes information about the egree device and therefore its checksumming capabilities.
+
+
+How things roll out in E1000
+-----------------------------
+During the probe routine, the features of the device are set in the net_device structure.
+e1000_probe():
+	      if (hw->mac_type >= e1000_82543) {
+                netdev->hw_features = NETIF_F_HW_CSUM
+		}
+
+The features are mainly taken into consideration when the hard_xmit function is called. 
+This function (dev_hard_start_xmit) is called whenever a packet has to be transmitted. This is a kernel routine. It gets the net_device
+structure and gets the ops function pointer from it. The field netdev_ops would have been initialized by the driver during the initialization 
+times.
+This function pointer is got in a variable called ops. This will be called to let the driver know that a packet is to be transmitted. 
+The features which the stack is willing to communicate with the driver is stored in the skb structure. 
+The function netif_skb_features extracts the features stored in the skb structure. 
+In net_device structure, it will be present in the following field. The line features &= NETIF_F_GEN_CSUM adds the hw checksumming feature.
+
+In the same xmit function,  the driver checks if the checksumming for the packet has already been done by the stack by comparing the field, 
+	if (skb->ip_summed == CHECKSUM_PARTIAL) {
+		/* In here, it sees if the device supports checksumming
+		The device's features is taken by netif_skb_features function which includes this line
+			netdev_features_t features = skb->dev->features;
+		The driver then tests with this variable, if checksumming is supported by the device and takes the decision as 				follows.
+			 if (!(features & NETIF_F_ALL_CSUM) &&
+                                      skb_checksum_help(skb))
+			 if the 1st parameter is NULL, then the second condition which is the function which calculates the
+				checksum is called.		
+		*/			
+	}
+	Finally it calls the device's transmit function by calling its function pointer.
+	rc = ops->ndo_start_xmit(skb, dev); // Transmit function
+
+
+
+Details of how the stack handles the fields related to checksumming
+

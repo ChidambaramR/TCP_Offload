@@ -19,3 +19,5 @@
 /proc/sys/kernel - stats about kernel like bootloader type, version etc
 
 
+/etc/protocols - gives the list of protocols and their numbers.
+
