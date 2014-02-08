@@ -1,0 +1,17 @@
+Imp PCI details about the devices
+
+pci_device_id - This is not a local ID by linux, but a global ID assigned by PCI standard. 
+
+pci_dev - Each pci device is assigned a pci_dev instance, just as network devices are.
+
+pci_driver - Defines the interaction between the PCI layer and the device drivers. PCI device drivers are defined by an instance of a pci_driver structure. 
+	name - Name of the driver.
+	id_table - vector of ID's the kernel will use to associate devices to this driver
+	probe - Function invoked by PCI layer when it finds a match between a device ID for which it is seeking the driver and the id_table. This function
+		i. enables the hardware
+		ii. allocates the net_device structure
+		iii. Initialize and register the new device. 
+		iv. Allocates additional data structures like buffer rings used during transmission reception.
+
+	remove - invoked by PCI layer when driver is unregisterd from kernel. 
+	suspend / resume - When system goes to suspend/resume this gets called. 

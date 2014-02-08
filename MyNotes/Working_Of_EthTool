@@ -1,0 +1,27 @@
+How ethtool works
+
+1. When we issue ethtool command, an ioctl is done. The command type is SIOCETHTOOL.
+
+2. This is received by function dev_ioctl.
+	File: net/core/dev.c#L4454
+
+3. The call again goes to dev_ethtool. The user supplied argument is passed via the struct ifreq's argument ifr. The dev_ethool function is found in net/core/ethtool.c#L896
+
+4. It checks for the following.
+	1. If device present.
+	2. Each net_device structure has a pointer ethtool_ops which has a list of function pointers. 
+	The net_device data structure includes a pointer to a VFT of type ethtool_ops. The latter structure is a collection of function pointers that can be used to both read and initialize a bunch of parameters on the net_device structure, or to trigger an action
+	
+
+5. If the user had to set receive checksum, then the following would have taken place.
+         case ETHTOOL_SRXCSUM:
+                 rc = ethtool_set_rx_csum(dev, useraddr);
+                 break;
+
+6. Inside the function ethtool_set_rx_csum, we check if the driver actually supports a receive checksum functionality. 
+         if (!dev->ethtool_ops->set_rx_csum)
+                 return -EOPNOTSUPP;
+
+7. If everything is fine, it calls the function pointer associated with the specific operation which the driver has initialized when bringing the device up.
+	return dev->ethtool_ops->set_rx_csum(dev, edata.data);
+

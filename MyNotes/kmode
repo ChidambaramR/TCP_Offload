@@ -1,0 +1,5 @@
+kmod
+
+kmod is the module loader that allows the kernel components to request the loading of a module. The main function is request_module. 
+
+When admin uses ifconfig to configure a network interface whose device driver has not been loaded yet, the kernel sends a request to /sbin/modprobe to load the module whose name is the string "eth0". If /etc/modprobe.conf contains the entry "alias eth0 3c59x", /sbin/modprobe tries to load 3c59x.ko
