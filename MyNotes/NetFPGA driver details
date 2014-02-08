@@ -1,0 +1,16 @@
+Packet Buffers, Structure and Management
+
+1.	There are two packet buffers in the driver. One is the RX buffer for receiving packets from the FPGA and the other is the TX buffer for sending packets to the FPGA. 
+
+2.	Every packet in the buffer is accompanied by metadata and flags. 
+	Flags:
+	------
+	If the RX buffer, a flag of 1 indicates that buffer is full and is ready to be processed by the networking stack. In the TX buffer for sending packets to the network, a flag of 1 indicates that the buffer is empty and can be written into. 
+	MetaData:
+	---------
+	Metadata for each packet contains only two things.
+	1. Length of the packet in bytes
+	2. opCode - Indicates the reference NIC, the desired destination interface of the packet. 
+		TX - opCode is set by the software of the orginating host interface. i.e Host interface 'i' corresponds to mac interface 'i'. 
+		RX - opCode is set by the hardware to be the destination host interface  
+	
