@@ -161,8 +161,8 @@ int nf10priv_xmit(struct nf10_card *card, struct sk_buff *skb, int port){
 
     // write to the card
     mb();
-    *(((uint64_t*)card->tx_dsc) + 8 * dsc_index + 0) = dsc_l0;
-    *(((uint64_t*)card->tx_dsc) + 8 * dsc_index + 1) = dsc_l1;
+    *(((uint64_t*)card->tx_ring->tx_dsc) + 8 * dsc_index + 0) = dsc_l0;
+    *(((uint64_t*)card->tx_ring->tx_dsc) + 8 * dsc_index + 1) = dsc_l1;
     mb();
 
     return 0;

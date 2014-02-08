@@ -64,12 +64,18 @@ struct my_work_t{
     struct nf10_card *card;
 };
 
+// TX ring structure
+struct nf10_tx_ring{
+    volatile void *tx_dsc;     // kernel virtual address of the card tx descriptor space
+};
+
+
 struct nf10_card{
     struct workqueue_struct *wq;
     struct my_work_t work;
 
     volatile void *cfg_addr;   // kernel virtual address of the card BAR0 space
-    volatile void *tx_dsc;     // kernel virtual address of the card tx descriptor space
+    struct nf10_tx_ring *tx_ring;
     volatile void *rx_dsc;     // kernel virtual address of the card rx descriptor space
 
     uint64_t tx_dsc_mask;

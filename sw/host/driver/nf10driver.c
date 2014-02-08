@@ -143,10 +143,18 @@ static int __devinit nf10_probe(struct pci_dev *pdev, const struct pci_device_id
 
 	printk(KERN_INFO "nf10: mapping mem memory\n");
 
-    card->tx_dsc = ioremap_nocache(pci_resource_start(pdev, 2) + 0 * 0x00100000ULL, 0x00100000ULL);
+	card->tx_ring = (struct nf10_card*)kmalloc(sizeof(struct nf10_tx_ring), GFP_KERNEL);
+	if (card->tx_ring == NULL) {
+		printk(KERN_ERR "nf10: Private card memory alloc failed\n");
+		ret = -ENOMEM;
+		goto err_out_release_mem_region2;
+	}
+	memset(card->tx_ring, 0, sizeof(struct nf10_tx_ring));
+
+    card->tx_ring->tx_dsc = ioremap_nocache(pci_resource_start(pdev, 2) + 0 * 0x00100000ULL, 0x00100000ULL);
     card->rx_dsc = ioremap_nocache(pci_resource_start(pdev, 2) + 1 * 0x00100000ULL, 0x00100000ULL);
 
-	if (!card->tx_dsc || !card->rx_dsc)
+	if (!card->tx_ring->tx_dsc || !card->rx_dsc)
 	{
 		printk(KERN_ERR "nf10: cannot mem region len:%lx start:%lx\n",
 			(long unsigned)pci_resource_len(pdev, 2),
@@ -294,7 +302,7 @@ static int __devinit nf10_probe(struct pci_dev *pdev, const struct pci_device_id
     pci_free_consistent(pdev, card->tx_dne_mask+1, card->host_tx_dne_ptr, card->host_tx_dne_dma);
     pci_free_consistent(pdev, card->rx_dne_mask+1, card->host_rx_dne_ptr, card->host_rx_dne_dma);
  err_out_iounmap:
-    if(card->tx_dsc) iounmap(card->tx_dsc);
+    if(card->tx_ring->tx_dsc) iounmap(card->tx_ring->tx_dsc);
     if(card->rx_dsc) iounmap(card->rx_dsc);
     if(card->cfg_addr)   iounmap(card->cfg_addr);
 	pci_set_drvdata(pdev, NULL);
@@ -324,7 +332,7 @@ static void __devexit nf10_remove(struct pci_dev *pdev){
 
         if(card->cfg_addr) iounmap(card->cfg_addr);
 
-        if(card->tx_dsc) iounmap(card->tx_dsc);
+        if(card->tx_ring->tx_dsc) iounmap(card->tx_ring->tx_dsc);
         if(card->rx_dsc) iounmap(card->rx_dsc);
 
         pci_free_consistent(pdev, card->tx_dne_mask+1, card->host_tx_dne_ptr, card->host_tx_dne_dma);
