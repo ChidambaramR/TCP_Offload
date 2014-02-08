@@ -1,5 +1,0 @@
-Packet Buffers, Structure and Management
-
-1.	There are two packet buffers in the driver. One is the RX buffer for receiving packets from the FPGA and the other is the TX buffer for sending packets to the FPGA. 
-
-2.	Every packet in the buffer is accompanied by metadata and flags. If the RX buffer, a flag of 1 indicates that buffer is full and is ready to be processed by the networking stack. In the TX buffer for sending packets to the network, a flag of 1 indicates that the buffer is empty and can be written into. 
