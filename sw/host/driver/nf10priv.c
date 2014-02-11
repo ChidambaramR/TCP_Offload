@@ -71,6 +71,8 @@
 #include <net/tcp.h>
 
 #define SK_BUFF_ALLOC_SIZE  1533
+#define NF10_GET_DESC(R, i, type)   (&(((struct type*)(R->tx_dsc))[i]))
+#define NF10_TX_DESC(R, i)  NF10_GET_DESC(R, i, nf10_tx_desc)
 
 //#define LOOPBACK_MODE
 
@@ -90,6 +92,7 @@ int nf10priv_xmit(struct nf10_card *card, struct sk_buff *skb, int port){
     uint64_t port_decoded = 0;
     uint64_t dsc_l0, dsc_l1;
     uint64_t dma_addr;
+    struct nf10_tx_desc *tx_desc;
 
     if(len > 1514)
         printk(KERN_ERR "nf10: ERROR too big packet. TX size: %d\n", len);
@@ -98,14 +101,14 @@ int nf10priv_xmit(struct nf10_card *card, struct sk_buff *skb, int port){
     spin_lock_irqsave(&tx_lock, flags);
 
     // make sure we fit in the descriptor ring and packet buffer
-    if( (atomic64_read(&card->mem_tx_dsc.cnt) + 1 <= card->mem_tx_dsc.cl_size) &&
-        (atomic64_read(&card->mem_tx_pkt.cnt) + cl_size <= card->mem_tx_pkt.cl_size)){
+    if( (atomic64_read(&card->tx_ring->mem_tx_dsc.cnt) + 1 <= card->tx_ring->mem_tx_dsc.cl_size) &&
+        (atomic64_read(&card->tx_ring->mem_tx_pkt.cnt) + cl_size <= card->tx_ring->mem_tx_pkt.cl_size)){
         
-        pkt_addr = card->mem_tx_pkt.wr_ptr;
-        card->mem_tx_pkt.wr_ptr = (pkt_addr + 64*cl_size) & card->mem_tx_pkt.mask;
+        pkt_addr = card->tx_ring->mem_tx_pkt.wr_ptr;
+        card->tx_ring->mem_tx_pkt.wr_ptr = (pkt_addr + 64*cl_size) & card->tx_ring->mem_tx_pkt.mask;
 
-        dsc_addr = card->mem_tx_dsc.wr_ptr;
-        card->mem_tx_dsc.wr_ptr = (dsc_addr + 64) & card->mem_tx_dsc.mask;
+        dsc_addr = card->tx_ring->mem_tx_dsc.wr_ptr;
+        card->tx_ring->mem_tx_dsc.wr_ptr = (dsc_addr + 64) & card->tx_ring->mem_tx_dsc.mask;
 
         // get physical address of the data
         dma_addr = pci_map_single(card->pdev, data, len, PCI_DMA_TODEVICE);
@@ -116,12 +119,12 @@ int nf10priv_xmit(struct nf10_card *card, struct sk_buff *skb, int port){
             return -1;
         }
 
-        atomic64_inc(&card->mem_tx_dsc.cnt);
-        atomic64_add(cl_size, &card->mem_tx_pkt.cnt);
+        atomic64_inc(&card->tx_ring->mem_tx_dsc.cnt);
+        atomic64_add(cl_size, &card->tx_ring->mem_tx_pkt.cnt);
         
         // there is space in the descriptor ring and at least 2k space in the pkt buffer
-        if( !(( atomic64_read(&card->mem_tx_dsc.cnt) + 1 <= card->mem_tx_dsc.cl_size  ) &&
-              ( atomic64_read(&card->mem_tx_pkt.cnt) + 32 <= card->mem_tx_pkt.cl_size )) ){   
+        if( !(( atomic64_read(&card->tx_ring->mem_tx_dsc.cnt) + 1 <= card->tx_ring->mem_tx_dsc.cl_size  ) &&
+              ( atomic64_read(&card->tx_ring->mem_tx_pkt.cnt) + 32 <= card->tx_ring->mem_tx_pkt.cl_size )) ){   
 
             netif_stop_queue(card->ndev[port]);
         }
@@ -160,10 +163,18 @@ int nf10priv_xmit(struct nf10_card *card, struct sk_buff *skb, int port){
     card->tx_bk_port[dsc_index] = port;
 
     // write to the card
+    tx_desc = (struct nf10_tx_desc*)NF10_TX_DESC(card->tx_ring, dsc_index);
+
+    mb();
+    tx_desc->cmd_word = dsc_l0;
+    tx_desc->buffer_addr = dsc_l1;
+    mb();
+    /*
     mb();
     *(((uint64_t*)card->tx_ring->tx_dsc) + 8 * dsc_index + 0) = dsc_l0;
     *(((uint64_t*)card->tx_ring->tx_dsc) + 8 * dsc_index + 1) = dsc_l1;
     mb();
+    */
 
     return 0;
 }
@@ -206,29 +217,29 @@ void work_handler(struct work_struct *w){
         irq_done = 1;
         
         // read the host completion buffers
-        tx_int = *(((uint32_t*)card->host_tx_dne_ptr) + (card->host_tx_dne.rd_ptr)/4);
+        tx_int = *(((uint32_t*)card->host_tx_dne_ptr) + (card->tx_ring->host_tx_dne.rd_ptr)/4);
         rx_int = *(((uint64_t*)card->host_rx_dne_ptr) + (card->host_rx_dne.rd_ptr)/8 + 7);
 
         if( (tx_int & 0xffff) == 1 ){
             irq_done = 0;
             
             // manage host completion buffer
-            addr = card->host_tx_dne.rd_ptr;
-            card->host_tx_dne.rd_ptr = (addr + 64) & card->host_tx_dne.mask;
+            addr = card->tx_ring->host_tx_dne.rd_ptr;
+            card->tx_ring->host_tx_dne.rd_ptr = (addr + 64) & card->tx_ring->host_tx_dne.mask;
             index = addr / 64;
             
             // clean up the skb
             pci_unmap_single(card->pdev, card->tx_bk_dma_addr[index], card->tx_bk_skb[index]->len, PCI_DMA_TODEVICE);
             dev_kfree_skb_any(card->tx_bk_skb[index]);
-            atomic64_sub(card->tx_bk_size[index], &card->mem_tx_pkt.cnt);
-            atomic64_dec(&card->mem_tx_dsc.cnt);
+            atomic64_sub(card->tx_bk_size[index], &card->tx_ring->mem_tx_pkt.cnt);
+            atomic64_dec(&card->tx_ring->mem_tx_dsc.cnt);
             
             // invalidate host tx completion buffer
             *(((uint32_t*)card->host_tx_dne_ptr) + index * 16) = 0xffffffff;
 
             // restart queue if needed
-            if( ((atomic64_read(&card->mem_tx_dsc.cnt) + 8*1) <= card->mem_tx_dsc.cl_size) &&
-                ((atomic64_read(&card->mem_tx_pkt.cnt) + 4*32) <= card->mem_tx_pkt.cl_size) ){
+            if( ((atomic64_read(&card->tx_ring->mem_tx_dsc.cnt) + 8*1) <= card->tx_ring->mem_tx_dsc.cl_size) &&
+                ((atomic64_read(&card->tx_ring->mem_tx_pkt.cnt) + 4*32) <= card->tx_ring->mem_tx_pkt.cl_size) ){
                 
                 for(i = 0; i < 4; i++){
                     if(netif_queue_stopped(card->ndev[i]))

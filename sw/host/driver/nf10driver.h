@@ -64,9 +64,20 @@ struct my_work_t{
     struct nf10_card *card;
 };
 
+struct nf10_tx_desc{
+    uint64_t cmd_word;
+    uint64_t buffer_addr;
+};
+
 // TX ring structure
 struct nf10_tx_ring{
     volatile void *tx_dsc;     // kernel virtual address of the card tx descriptor space
+    uint64_t tx_dsc_mask;
+    uint64_t tx_pkt_mask;
+    uint64_t tx_dne_mask;
+    struct nf10mem mem_tx_dsc;
+    struct nf10mem mem_tx_pkt;
+    struct nf10mem host_tx_dne;
 };
 
 
@@ -78,11 +89,8 @@ struct nf10_card{
     struct nf10_tx_ring *tx_ring;
     volatile void *rx_dsc;     // kernel virtual address of the card rx descriptor space
 
-    uint64_t tx_dsc_mask;
     uint64_t rx_dsc_mask;
-    uint64_t tx_pkt_mask;
     uint64_t rx_pkt_mask;
-    uint64_t tx_dne_mask;
     uint64_t rx_dne_mask;
 
     void *host_tx_dne_ptr;         // virtual address
@@ -97,11 +105,8 @@ struct nf10_card{
     struct net_device *ndev[4]; // network devices
     
     // memory buffers
-    struct nf10mem mem_tx_dsc;
-    struct nf10mem mem_tx_pkt;
     struct nf10mem mem_rx_dsc;
     struct nf10mem mem_rx_pkt;
-    struct nf10mem host_tx_dne;
     struct nf10mem host_rx_dne;
 
     // tx book keeping
