@@ -184,6 +184,7 @@ int nf10iface_probe(struct pci_dev *pdev, struct nf10_card *card){
     }
 
     // give some descriptors to the card
+    printk("Allocating %016llx receive descriptors\n",card->mem_rx_dsc.cl_size-2);
     for(i = 0; i < card->mem_rx_dsc.cl_size-2; i++){
         nf10priv_send_rx_dsc(card);
     }

@@ -394,13 +394,16 @@ int nf10priv_send_rx_dsc(struct nf10_card *card){
         skb_reserve(skb, 2); /* align IP on 16B boundary */   
 
         pkt_addr = card->mem_rx_pkt.wr_ptr;
+	printk("pkt_addr = %016llx\n",pkt_addr);
         card->mem_rx_pkt.wr_ptr = (pkt_addr + 64*cl_size) & card->mem_rx_pkt.mask;
 
         dsc_addr = card->mem_rx_dsc.wr_ptr;
+	printk("dsc_addr = %016llx\n",dsc_addr);
         card->mem_rx_dsc.wr_ptr = (dsc_addr + 64) & card->mem_rx_dsc.mask;
 
         atomic64_inc(&card->mem_rx_dsc.cnt);
         atomic64_add(cl_size, &card->mem_rx_pkt.cnt);
+	printk("dsc cnt = %016llx, rx_pkt_cnt = %016llx\n",card->mem_rx_dsc.cnt, card->mem_rx_pkt.cnt);
         
     } 
     else{

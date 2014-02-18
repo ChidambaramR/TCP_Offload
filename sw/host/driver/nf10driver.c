@@ -116,6 +116,11 @@ static int __devinit nf10_probe(struct pci_dev *pdev, const struct pci_device_id
     }
 	
     // be nice and tell kernel that we'll use this resource
+    /*
+    * request_mem_region(unsigned long start, unsigned long len, char *name)
+    * I/O memory region. Allocates a memory region of len bytes, starting at start. A non NULL pointer is returned on success
+    * This sort of I/O memory is not directly accessible. It should be mapped. The mapping is done by ioremap function. 
+    */
 	printk(KERN_INFO "nf10: Reserving memory region for NF10\n");
 	if (!request_mem_region(pci_resource_start(pdev, 0), pci_resource_len(pdev, 0), DEVICE_NAME)) {
 		printk(KERN_ERR "nf10: Reserving memory region failed\n");
@@ -139,6 +144,11 @@ static int __devinit nf10_probe(struct pci_dev *pdev, const struct pci_device_id
     card->pdev = pdev;
 	
     // map the cfg memory
+    /*
+    * This function assigns virtual addresses to I/O memory regions
+    * The addresses returned by ioremap should not be accessed directly. Kernel helper functions should  be used. 
+    * ioremap_nocache is hardware related.
+    */
 	printk(KERN_INFO "nf10: mapping cfg memory\n");
     card->cfg_addr = ioremap_nocache(pci_resource_start(pdev, 0), pci_resource_len(pdev, 0));
 	if (!card->cfg_addr)
@@ -181,7 +191,11 @@ static int __devinit nf10_probe(struct pci_dev *pdev, const struct pci_device_id
     card->rx_pkt_mask = 0x00007fffULL;
     card->tx_ring->tx_dne_mask = 0x000007ffULL;
     card->rx_dne_mask = 0x000007ffULL;
-    
+   
+    /*
+    This might look a little awkward that we are checking for the same values which we set above.
+    I believe the code has been written with flexibility in mind. 
+    */ 
     if(card->tx_ring->tx_dsc_mask > card->tx_ring->tx_dne_mask){
         *(((uint64_t*)card->cfg_addr)+1) = card->tx_ring->tx_dne_mask;
         card->tx_ring->tx_dsc_mask = card->tx_ring->tx_dne_mask;
@@ -201,9 +215,16 @@ static int __devinit nf10_probe(struct pci_dev *pdev, const struct pci_device_id
     }
 
     // allocate buffers to play with
+    /*
+    * DMA requires some memory space that can be accessed by the hardware, which is not cached and which is 
+    * physically contiguous. 
+    */
     card->host_tx_dne_ptr = pci_alloc_consistent(pdev, card->tx_ring->tx_dne_mask+1, &(card->host_tx_dne_dma));
     card->host_rx_dne_ptr = pci_alloc_consistent(pdev, card->rx_dne_mask+1, &(card->host_rx_dne_dma));
 
+    printk("Virtual address of TX buffer = %p, physical address of TX buffer = %016llxx",(void*)card->host_tx_dne_ptr, card->host_tx_dne_dma);
+    printk("Virtual address of RX buffer = %p, physical address of RX buffer = %016llxx",(void*)card->host_rx_dne_ptr, card->host_rx_dne_dma);
+   
     if( (card->host_rx_dne_ptr == NULL) ||
         (card->host_tx_dne_ptr == NULL) ){
         
