@@ -67,7 +67,7 @@ struct my_work_t{
 struct nf10_tx_desc{
     uint64_t cmd_word;
     uint64_t buffer_addr;
-};
+} __attribute__ ((aligned(64)));
 
 // TX ring structure
 struct nf10_tx_ring{

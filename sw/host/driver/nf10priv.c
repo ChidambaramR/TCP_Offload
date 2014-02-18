@@ -100,10 +100,13 @@ int nf10priv_xmit(struct nf10_card *card, struct sk_buff *skb, int port){
     // packet buffer management
     spin_lock_irqsave(&tx_lock, flags);
 
+    printk("hello world  ");
+
     // make sure we fit in the descriptor ring and packet buffer
     if( (atomic64_read(&card->tx_ring->mem_tx_dsc.cnt) + 1 <= card->tx_ring->mem_tx_dsc.cl_size) &&
         (atomic64_read(&card->tx_ring->mem_tx_pkt.cnt) + cl_size <= card->tx_ring->mem_tx_pkt.cl_size)){
         
+    printk("hello world1  ");
         pkt_addr = card->tx_ring->mem_tx_pkt.wr_ptr;
         card->tx_ring->mem_tx_pkt.wr_ptr = (pkt_addr + 64*cl_size) & card->tx_ring->mem_tx_pkt.mask;
 
@@ -125,6 +128,7 @@ int nf10priv_xmit(struct nf10_card *card, struct sk_buff *skb, int port){
         // there is space in the descriptor ring and at least 2k space in the pkt buffer
         if( !(( atomic64_read(&card->tx_ring->mem_tx_dsc.cnt) + 1 <= card->tx_ring->mem_tx_dsc.cl_size  ) &&
               ( atomic64_read(&card->tx_ring->mem_tx_pkt.cnt) + 32 <= card->tx_ring->mem_tx_pkt.cl_size )) ){   
+    printk("hello world2  ");
 
             netif_stop_queue(card->ndev[port]);
         }
@@ -132,6 +136,7 @@ int nf10priv_xmit(struct nf10_card *card, struct sk_buff *skb, int port){
     } 
     else{
         spin_unlock_irqrestore(&tx_lock, flags);
+    printk("hello world3  ");
         return -1;
     }
     
@@ -163,7 +168,11 @@ int nf10priv_xmit(struct nf10_card *card, struct sk_buff *skb, int port){
     card->tx_bk_port[dsc_index] = port;
 
     // write to the card
+    printk("hello world4  ");
+
     tx_desc = (struct nf10_tx_desc*)NF10_TX_DESC(card->tx_ring, dsc_index);
+
+	printk("writing to device");
 
     mb();
     tx_desc->cmd_word = dsc_l0;

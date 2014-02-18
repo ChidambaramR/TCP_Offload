@@ -41,6 +41,7 @@
 #include "nf10iface.h"
 #include "nf10driver.h"
 #include "nf10priv.h"
+#include "nf10_ethtool.h"
 
 #include <linux/interrupt.h>
 #include <linux/pci.h>
@@ -75,9 +76,10 @@ static netdev_tx_t nf10i_tx(struct sk_buff *skb, struct net_device *dev){
         return NETDEV_TX_OK;        
     }
 
+	printk("transmitting packets");
     // transmit packet
     if(nf10priv_xmit(card, skb, port)){
-        //printk(KERN_ERR "nf10: dropping packet at port %d", port);
+        printk(KERN_ERR "nf10: dropping packet at port %d", port);
         dev_kfree_skb_any(skb);
         return NETDEV_TX_OK;
     }
@@ -127,12 +129,14 @@ static const struct net_device_ops nf10_ops = {
     .ndo_set_mac_address = nf10i_set_mac
 };
 
+
 // init called by alloc_netdev
 static void nf10iface_init(struct net_device *dev)
 {
   ether_setup(dev); /* assign some of the fields */
   
   dev->netdev_ops      = &nf10_ops;
+  nf10_set_ethtool_ops(dev);
   dev->watchdog_timeo  = msecs_to_jiffies(5000);
   dev->mtu             = MTU;
 

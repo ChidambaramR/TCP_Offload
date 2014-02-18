@@ -78,6 +78,10 @@ static int __devinit nf10_probe(struct pci_dev *pdev, const struct pci_device_id
     struct nf10_card *card;
 
 	// enable device
+    	/* Enable the device. pci_enable_device() will do the following (ref. PCI/pci.txt kernel doc):
+     	*     - wake up the device if it was in suspended state
+     	*     - allocate I/O and memory regions of the device (if BIOS did not)
+     	*     - allocate an IRQ (if BIOS did not) */
 	if((err = pci_enable_device(pdev))) {
 		printk(KERN_ERR "nf10: Unable to enable the PCI device!\n");
         ret = -ENODEV;
@@ -97,7 +101,11 @@ static int __devinit nf10_probe(struct pci_dev *pdev, const struct pci_device_id
         }
     }
 
-    // enable BusMaster (enables generation of pcie requests)
+    	 // enable BusMaster (enables generation of pcie requests)
+	 /* Enable DMA functionality for the device.
+     	  * pci_set_master() does this by (ref. PCI/pci.txt kernel doc) setting the bus master bit
+     	  * in the PCI_COMMAND register. pci_clear_master() will disable DMA by clearing the bit.
+    	  * This function also sets the latency timer value if necessary. */
 	pci_set_master(pdev);
 
     // enable MSI
