@@ -75,40 +75,44 @@ struct nf10_tx_ring{
     uint64_t tx_dsc_mask;
     uint64_t tx_pkt_mask;
     uint64_t tx_dne_mask;
+   
+    void *host_tx_dne_ptr;         // virtual address
+    uint64_t host_tx_dne_dma;      // physical address
+  
+    // memory buffers
     struct nf10mem mem_tx_dsc;
     struct nf10mem mem_tx_pkt;
     struct nf10mem host_tx_dne;
+};
+
+struct nf10_rx_ring{
+    volatile void *rx_dsc;
+    uint64_t rx_dsc_mask;
+    uint64_t rx_pkt_mask;
+    uint64_t rx_dne_mask;
+
+    void *host_rx_dne_ptr;         // virtual address
+    uint64_t host_rx_dne_dma;      // physical address
+
+    // memory buffers
+    struct nf10mem mem_rx_dsc;
+    struct nf10mem mem_rx_pkt;
+    struct nf10mem host_rx_dne;
 };
 
 
 struct nf10_card{
     struct workqueue_struct *wq;
     struct my_work_t work;
-
     volatile void *cfg_addr;   // kernel virtual address of the card BAR0 space
+
     struct nf10_tx_ring *tx_ring;
-    volatile void *rx_dsc;     // kernel virtual address of the card rx descriptor space
+    struct nf10_rx_ring *rx_ring;
 
-    uint64_t rx_dsc_mask;
-    uint64_t rx_pkt_mask;
-    uint64_t rx_dne_mask;
-
-    void *host_tx_dne_ptr;         // virtual address
-    uint64_t host_tx_dne_dma;      // physical address
-
-    void *host_rx_dne_ptr;         // virtual address
-    uint64_t host_rx_dne_dma;      // physical address
-    
     struct pci_dev *pdev;
     struct cdev cdev; // char device structure (for /dev/nf10)
-
     struct net_device *ndev[4]; // network devices
     
-    // memory buffers
-    struct nf10mem mem_rx_dsc;
-    struct nf10mem mem_rx_pkt;
-    struct nf10mem host_rx_dne;
-
     // tx book keeping
     struct sk_buff  **tx_bk_skb;
     uint64_t *tx_bk_dma_addr;

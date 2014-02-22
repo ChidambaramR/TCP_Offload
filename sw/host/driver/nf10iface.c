@@ -76,7 +76,7 @@ static netdev_tx_t nf10i_tx(struct sk_buff *skb, struct net_device *dev){
         return NETDEV_TX_OK;        
     }
 
-	printk("transmitting packets");
+	//printk("transmitting packets");
     // transmit packet
     if(nf10priv_xmit(card, skb, port)){
         printk(KERN_ERR "nf10: dropping packet at port %d", port);
@@ -184,8 +184,8 @@ int nf10iface_probe(struct pci_dev *pdev, struct nf10_card *card){
     }
 
     // give some descriptors to the card
-    printk("Allocating %016llx receive descriptors\n",card->mem_rx_dsc.cl_size-2);
-    for(i = 0; i < card->mem_rx_dsc.cl_size-2; i++){
+    printk("Allocating %016llx receive descriptors\n",card->rx_ring->mem_rx_dsc.cl_size-2);
+    for(i = 0; i < card->rx_ring->mem_rx_dsc.cl_size-2; i++){
         nf10priv_send_rx_dsc(card);
     }
 

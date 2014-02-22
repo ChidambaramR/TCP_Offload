@@ -80,6 +80,8 @@ static DEFINE_SPINLOCK(tx_lock);
 static DEFINE_SPINLOCK(work_lock);
 static DEFINE_SPINLOCK(rx_dsc_lock);
 
+int mydbg = 0;
+
 DECLARE_WORK(wq, work_handler);
 
 int nf10priv_xmit(struct nf10_card *card, struct sk_buff *skb, int port){
@@ -100,13 +102,13 @@ int nf10priv_xmit(struct nf10_card *card, struct sk_buff *skb, int port){
     // packet buffer management
     spin_lock_irqsave(&tx_lock, flags);
 
-    printk("hello world  ");
+    //printk("hello world  ");
 
     // make sure we fit in the descriptor ring and packet buffer
     if( (atomic64_read(&card->tx_ring->mem_tx_dsc.cnt) + 1 <= card->tx_ring->mem_tx_dsc.cl_size) &&
         (atomic64_read(&card->tx_ring->mem_tx_pkt.cnt) + cl_size <= card->tx_ring->mem_tx_pkt.cl_size)){
         
-    printk("hello world1  ");
+    //printk("hello world1  ");
         pkt_addr = card->tx_ring->mem_tx_pkt.wr_ptr;
         card->tx_ring->mem_tx_pkt.wr_ptr = (pkt_addr + 64*cl_size) & card->tx_ring->mem_tx_pkt.mask;
 
@@ -128,7 +130,7 @@ int nf10priv_xmit(struct nf10_card *card, struct sk_buff *skb, int port){
         // there is space in the descriptor ring and at least 2k space in the pkt buffer
         if( !(( atomic64_read(&card->tx_ring->mem_tx_dsc.cnt) + 1 <= card->tx_ring->mem_tx_dsc.cl_size  ) &&
               ( atomic64_read(&card->tx_ring->mem_tx_pkt.cnt) + 32 <= card->tx_ring->mem_tx_pkt.cl_size )) ){   
-    printk("hello world2  ");
+//    printk("hello world2  ");
 
             netif_stop_queue(card->ndev[port]);
         }
@@ -136,7 +138,7 @@ int nf10priv_xmit(struct nf10_card *card, struct sk_buff *skb, int port){
     } 
     else{
         spin_unlock_irqrestore(&tx_lock, flags);
-    printk("hello world3  ");
+//    printk("hello world3  ");
         return -1;
     }
     
@@ -168,7 +170,7 @@ int nf10priv_xmit(struct nf10_card *card, struct sk_buff *skb, int port){
     card->tx_bk_port[dsc_index] = port;
 
     // write to the card
-    printk("hello world4  ");
+    //printk("hello world4  ");
 
     tx_desc = (struct nf10_tx_desc*)NF10_TX_DESC(card->tx_ring, dsc_index);
 
@@ -226,8 +228,17 @@ void work_handler(struct work_struct *w){
         irq_done = 1;
         
         // read the host completion buffers
-        tx_int = *(((uint32_t*)card->host_tx_dne_ptr) + (card->tx_ring->host_tx_dne.rd_ptr)/4);
-        rx_int = *(((uint64_t*)card->host_rx_dne_ptr) + (card->host_rx_dne.rd_ptr)/8 + 7);
+	// Why are they incrementing by 64 bytes here??
+        tx_int = *(((uint32_t*)card->tx_ring->host_tx_dne_ptr) + (card->tx_ring->host_tx_dne.rd_ptr)/4);
+        rx_int = *(((uint64_t*)card->rx_ring->host_rx_dne_ptr) + (card->rx_ring->host_rx_dne.rd_ptr)/8 + 7);
+	
+	if(mydbg < 5){
+		printk("\n\nNew Cycle:\n");
+		printk("ADD: tx_ring->host_tx_dne_ptr %p, VAL: tx_ring->host_tx_dne_ptr %x\n",(void*)((uint32_t*)card->tx_ring->host_tx_dne_ptr), *((uint32_t*)card->tx_ring->host_tx_dne_ptr));
+		printk("ADD: rx_ring->host_rx_dne_ptr %p, VAL: rx_ring->host_rx_dne_ptr %016llx\n",(void*)((uint64_t*)card->rx_ring->host_rx_dne_ptr), *((uint64_t*)card->rx_ring->host_rx_dne_ptr));
+		printk("ADD: tx_int = %p, VAL: tx_int = %x\n",(void*)(((uint32_t*)card->tx_ring->host_tx_dne_ptr) + (card->tx_ring->host_tx_dne.rd_ptr)/4), tx_int);
+		printk("ADD: rx_int = %p, VAL: tx_int = %016llx\n",(void*)(((uint64_t*)card->rx_ring->host_rx_dne_ptr) + (card->rx_ring->host_rx_dne.rd_ptr)/8 + 7), rx_int);
+	}
 
         if( (tx_int & 0xffff) == 1 ){
             irq_done = 0;
@@ -244,7 +255,7 @@ void work_handler(struct work_struct *w){
             atomic64_dec(&card->tx_ring->mem_tx_dsc.cnt);
             
             // invalidate host tx completion buffer
-            *(((uint32_t*)card->host_tx_dne_ptr) + index * 16) = 0xffffffff;
+            *(((uint32_t*)card->tx_ring->host_tx_dne_ptr) + index * 16) = 0xffffffff;
 
             // restart queue if needed
             if( ((atomic64_read(&card->tx_ring->mem_tx_dsc.cnt) + 8*1) <= card->tx_ring->mem_tx_dsc.cl_size) &&
@@ -260,20 +271,28 @@ void work_handler(struct work_struct *w){
         
         if( ((rx_int >> 48) & 0xffff) != 0xffff ){
             irq_done = 0;
+
+		if(mydbg < 5){
+			printk("ADD: tx_ring->host_tx_dne_ptr %p, VAL: tx_ring->host_tx_dne_ptr %x\n",(void*)((uint32_t*)card->tx_ring->host_tx_dne_ptr), *((uint32_t*)card->tx_ring->host_tx_dne_ptr));
+			printk("ADD: rx_ring->host_rx_dne_ptr %p, VAL: rx_ring->host_rx_dne_ptr %016llx\n",(void*)((uint64_t*)card->rx_ring->host_rx_dne_ptr), *((uint64_t*)card->rx_ring->host_rx_dne_ptr));
+			printk("ADD: tx_int = %p, VAL: tx_int = %x\n",(void*)(((uint32_t*)card->tx_ring->host_tx_dne_ptr) + (card->tx_ring->host_tx_dne.rd_ptr)/4), tx_int);
+			printk("ADD: rx_int = %p, VAL: tx_int = %016llx\n",(void*)(((uint64_t*)card->rx_ring->host_rx_dne_ptr) + (card->rx_ring->host_rx_dne.rd_ptr)/8 + 7), rx_int);
+			mydbg++;
+	}
                 
             // manage host completion buffer
-            addr = card->host_rx_dne.rd_ptr;
-            card->host_rx_dne.rd_ptr = (addr + 64) & card->host_rx_dne.mask;
+            addr = card->rx_ring->host_rx_dne.rd_ptr;
+            card->rx_ring->host_rx_dne.rd_ptr = (addr + 64) & card->rx_ring->host_rx_dne.mask;
             index = addr / 64;
             
             // invalidate host rx completion buffer
-            *(((uint64_t*)card->host_rx_dne_ptr) + index * 8 + 7) = 0xffffffffffffffffULL;
+            *(((uint64_t*)card->rx_ring->host_rx_dne_ptr) + index * 8 + 7) = 0xffffffffffffffffULL;
 
             // skb is now ready
             skb = card->rx_bk_skb[index];
             pci_unmap_single(card->pdev, card->rx_bk_dma_addr[index], skb->len, PCI_DMA_FROMDEVICE);
-            atomic64_sub(card->rx_bk_size[index], &card->mem_rx_pkt.cnt);
-            atomic64_dec(&card->mem_rx_dsc.cnt);
+            atomic64_sub(card->rx_bk_size[index], &card->rx_ring->mem_rx_pkt.cnt);
+            atomic64_dec(&card->rx_ring->mem_rx_dsc.cnt);
             
             // give the card a new RX descriptor
             nf10priv_send_rx_dsc(card);
@@ -374,6 +393,11 @@ int nf10priv_send_rx_dsc(struct nf10_card *card){
     uint64_t dma_addr;
     uint64_t pkt_addr = 0, pkt_addr_fixed = 0;
     uint64_t dsc_addr = 0, dsc_index = 0;
+    /*
+    The resulting number is aligned. i.e it can be divided by 8, 64 as well as 4.
+    SK_BUFF_ALLOC_SIZE is 1533 which is not aligned by default. The above operation leads to
+    a quotient (24 in this case) which when multiplied by 64 is divisible by 8, 24 and 4
+    */
     uint64_t cl_size = (SK_BUFF_ALLOC_SIZE + 66) / 64;
     unsigned long flags;
     uint64_t dsc_l0, dsc_l1;
@@ -382,8 +406,8 @@ int nf10priv_send_rx_dsc(struct nf10_card *card){
     spin_lock_irqsave(&rx_dsc_lock, flags);
 
     // make sure we fit in the descriptor ring and packet buffer
-    if( (atomic64_read(&card->mem_rx_dsc.cnt) + 1 <= card->mem_rx_dsc.cl_size) &&
-        (atomic64_read(&card->mem_rx_pkt.cnt) + cl_size <= card->mem_rx_pkt.cl_size)){
+    if( (atomic64_read(&card->rx_ring->mem_rx_dsc.cnt) + 1 <= card->rx_ring->mem_rx_dsc.cl_size) &&
+        (atomic64_read(&card->rx_ring->mem_rx_pkt.cnt) + cl_size <= card->rx_ring->mem_rx_pkt.cl_size)){
         
         skb = dev_alloc_skb(SK_BUFF_ALLOC_SIZE + 2);
         if(!skb) {
@@ -391,19 +415,26 @@ int nf10priv_send_rx_dsc(struct nf10_card *card){
             spin_unlock_irqrestore(&rx_dsc_lock, flags);
             return -1;
         }
+
+	/*
+	* When setting up receive packets that an ethernet device will DMA into, we typically call 
+	* skb_reserve(skb, NET_IP_ALIGN)
+	* NET_IP_ALIGN is defined to 2. This makes it so that, after the ethernet header, the protocol header
+	* will be aligned on atleast 4 byte boundary. 
+	*/
         skb_reserve(skb, 2); /* align IP on 16B boundary */   
 
-        pkt_addr = card->mem_rx_pkt.wr_ptr;
-	printk("pkt_addr = %016llx\n",pkt_addr);
-        card->mem_rx_pkt.wr_ptr = (pkt_addr + 64*cl_size) & card->mem_rx_pkt.mask;
+        pkt_addr = card->rx_ring->mem_rx_pkt.wr_ptr;
+//	printk("pkt_addr = %016llx\n",pkt_addr);
+        card->rx_ring->mem_rx_pkt.wr_ptr = (pkt_addr + 64*cl_size) & card->rx_ring->mem_rx_pkt.mask;
 
-        dsc_addr = card->mem_rx_dsc.wr_ptr;
-	printk("dsc_addr = %016llx\n",dsc_addr);
-        card->mem_rx_dsc.wr_ptr = (dsc_addr + 64) & card->mem_rx_dsc.mask;
+        dsc_addr = card->rx_ring->mem_rx_dsc.wr_ptr;
+//	printk("dsc_addr = %016llx\n",dsc_addr);
+        card->rx_ring->mem_rx_dsc.wr_ptr = (dsc_addr + 64) & card->rx_ring->mem_rx_dsc.mask;
 
-        atomic64_inc(&card->mem_rx_dsc.cnt);
-        atomic64_add(cl_size, &card->mem_rx_pkt.cnt);
-	printk("dsc cnt = %016llx, rx_pkt_cnt = %016llx\n",card->mem_rx_dsc.cnt, card->mem_rx_pkt.cnt);
+        atomic64_inc(&card->rx_ring->mem_rx_dsc.cnt);
+        atomic64_add(cl_size, &card->rx_ring->mem_rx_pkt.cnt);
+//	printk("dsc cnt = %016llx, rx_pkt_cnt = %016llx\n",card->rx_ring->mem_rx_dsc.cnt, card->rx_ring->mem_rx_pkt.cnt);
         
     } 
     else{
@@ -420,20 +451,48 @@ int nf10priv_send_rx_dsc(struct nf10_card *card){
 
     // fix address for alignment issues
     pkt_addr_fixed = pkt_addr + (dma_addr & 0x3ULL);
+    //printk("dma_addr = %016llx  pkt_addr_fixed = %016llx\n",dma_addr, pkt_addr_fixed);
 
     // prepare RX descriptor
     dsc_l0 = ((uint64_t)SK_BUFF_ALLOC_SIZE << 48) + (pkt_addr_fixed & 0xffffffff);
     dsc_l1 = dma_addr;
+    //printk("dsc_lo = %016llx    dsc_l1 = %016llx\n",dsc_l0, dsc_l1);
 
     // book keeping
     card->rx_bk_dma_addr[dsc_index] = dma_addr;
     card->rx_bk_skb[dsc_index] = skb;
     card->rx_bk_size[dsc_index] = cl_size;
 
+    /*
+    * Sample data
+    * This is how the RX ring would look like
+     	pkt_addr = 0000000000000000 dsc_addr       = 0000000000000000
+	dsc cnt  = 0000000000000001 rx_pkt_cnt     = 0000000000000018
+	dma_addr = 000000002989e842 pkt_addr_fixed = 0000000000000002
+	dsc_lo   = 05fd000000000002   dsc_l1       = 000000002989e842
+
+	pkt_addr = 0000000000000600 dsc_addr       = 0000000000000040
+	dsc cnt  = 0000000000000002 rx_pkt_cnt     = 0000000000000030
+	dma_addr = 00000000299d2042 pkt_addr_fixed = 0000000000000602
+	dsc_lo   = 05fd000000000602 dsc_l1         = 00000000299d2042
+
+	.
+	.
+	.
+
+	pkt_addr = 0000000000007800 dsc_addr       = 0000000000000500
+	dsc cnt  = 0000000000000015 rx_pkt_cnt     = 00000000000001f8
+	dma_addr = 000000000dcb7042 pkt_addr_fixed = 0000000000007802
+	dsc_lo   = 05fd000000007802 dsc_l1         = 000000000dcb7042
+
+    */
+
+
+
     // write to the card
     mb();
-    *(((uint64_t*)card->rx_dsc) + 8 * dsc_index + 0) = dsc_l0;
-    *(((uint64_t*)card->rx_dsc) + 8 * dsc_index + 1) = dsc_l1;
+    *(((uint64_t*)card->rx_ring->rx_dsc) + 8 * dsc_index + 0) = dsc_l0;
+    *(((uint64_t*)card->rx_ring->rx_dsc) + 8 * dsc_index + 1) = dsc_l1;
     mb();
 
     return 0;

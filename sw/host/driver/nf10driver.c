@@ -161,6 +161,9 @@ static int __devinit nf10_probe(struct pci_dev *pdev, const struct pci_device_id
 
 	printk(KERN_INFO "nf10: mapping mem memory\n");
 
+	/*
+ 	* Get memory for TX ring 
+ 	*/ 
 	card->tx_ring = (struct nf10_tx_ring*)kmalloc(sizeof(struct nf10_tx_ring), GFP_KERNEL);
 	if (card->tx_ring == NULL) {
 		printk(KERN_ERR "nf10: Private card memory alloc failed\n");
@@ -169,10 +172,24 @@ static int __devinit nf10_probe(struct pci_dev *pdev, const struct pci_device_id
 	}
 	memset(card->tx_ring, 0, sizeof(struct nf10_tx_ring));
 
-    card->tx_ring->tx_dsc = ioremap_nocache(pci_resource_start(pdev, 2) + 0 * 0x00100000ULL, 0x00100000ULL);
-    card->rx_dsc = ioremap_nocache(pci_resource_start(pdev, 2) + 1 * 0x00100000ULL, 0x00100000ULL);
 
-	if (!card->tx_ring->tx_dsc || !card->rx_dsc)
+	/*
+ 	* Get memory for RX ring 
+ 	*/ 
+	card->rx_ring = (struct nf10_rx_ring*)kmalloc(sizeof(struct nf10_rx_ring), GFP_KERNEL);
+	if (card->rx_ring == NULL) {
+		printk(KERN_ERR "nf10: Private card memory alloc failed\n");
+		ret = -ENOMEM;
+		goto err_out_release_mem_region2;
+	}
+	memset(card->tx_ring, 0, sizeof(struct nf10_tx_ring));
+
+	card->tx_ring->tx_dsc = ioremap_nocache(pci_resource_start(pdev, 2) + 0 * 0x00100000ULL, 0x00100000ULL);
+        card->rx_ring->rx_dsc = ioremap_nocache(pci_resource_start(pdev, 2) + 1 * 0x00100000ULL, 0x00100000ULL);
+	
+	printk("TX_DSC addr: %p   RX_DSC addr: %p\n",card->tx_ring->tx_dsc, card->rx_ring->rx_dsc);
+
+	if (!card->tx_ring->tx_dsc || !card->rx_ring->rx_dsc)
 	{
 		printk(KERN_ERR "nf10: cannot mem region len:%lx start:%lx\n",
 			(long unsigned)pci_resource_len(pdev, 2),
@@ -186,11 +203,11 @@ static int __devinit nf10_probe(struct pci_dev *pdev, const struct pci_device_id
 
     // set buffer masks
     card->tx_ring->tx_dsc_mask = 0x000007ffULL;
-    card->rx_dsc_mask = 0x000007ffULL;
+    card->rx_ring->rx_dsc_mask = 0x000007ffULL;
     card->tx_ring->tx_pkt_mask = 0x00007fffULL;
-    card->rx_pkt_mask = 0x00007fffULL;
+    card->rx_ring->rx_pkt_mask = 0x00007fffULL;
     card->tx_ring->tx_dne_mask = 0x000007ffULL;
-    card->rx_dne_mask = 0x000007ffULL;
+    card->rx_ring->rx_dne_mask = 0x000007ffULL;
    
     /*
     This might look a little awkward that we are checking for the same values which we set above.
@@ -205,13 +222,13 @@ static int __devinit nf10_probe(struct pci_dev *pdev, const struct pci_device_id
         card->tx_ring->tx_dne_mask = card->tx_ring->tx_dsc_mask;
     }
 
-    if(card->rx_dsc_mask > card->rx_dne_mask){
-        *(((uint64_t*)card->cfg_addr)+9) = card->rx_dne_mask;
-        card->rx_dsc_mask = card->rx_dne_mask;
+    if(card->rx_ring->rx_dsc_mask > card->rx_ring->rx_dne_mask){
+        *(((uint64_t*)card->cfg_addr)+9) = card->rx_ring->rx_dne_mask;
+        card->rx_ring->rx_dsc_mask = card->rx_ring->rx_dne_mask;
     }
-    else if(card->rx_dne_mask > card->rx_dsc_mask){
-        *(((uint64_t*)card->cfg_addr)+15) = card->rx_dsc_mask;
-        card->rx_dne_mask = card->rx_dsc_mask;
+    else if(card->rx_ring->rx_dne_mask > card->rx_ring->rx_dsc_mask){
+        *(((uint64_t*)card->cfg_addr)+15) = card->rx_ring->rx_dsc_mask;
+        card->rx_ring->rx_dne_mask = card->rx_ring->rx_dsc_mask;
     }
 
     // allocate buffers to play with
@@ -219,24 +236,24 @@ static int __devinit nf10_probe(struct pci_dev *pdev, const struct pci_device_id
     * DMA requires some memory space that can be accessed by the hardware, which is not cached and which is 
     * physically contiguous. 
     */
-    card->host_tx_dne_ptr = pci_alloc_consistent(pdev, card->tx_ring->tx_dne_mask+1, &(card->host_tx_dne_dma));
-    card->host_rx_dne_ptr = pci_alloc_consistent(pdev, card->rx_dne_mask+1, &(card->host_rx_dne_dma));
+    card->tx_ring->host_tx_dne_ptr = pci_alloc_consistent(pdev, card->tx_ring->tx_dne_mask+1, &(card->tx_ring->host_tx_dne_dma));
+    card->rx_ring->host_rx_dne_ptr = pci_alloc_consistent(pdev, card->rx_ring->rx_dne_mask+1, &(card->rx_ring->host_rx_dne_dma));
 
-    printk("Virtual address of TX buffer = %p, physical address of TX buffer = %016llxx",(void*)card->host_tx_dne_ptr, card->host_tx_dne_dma);
-    printk("Virtual address of RX buffer = %p, physical address of RX buffer = %016llxx",(void*)card->host_rx_dne_ptr, card->host_rx_dne_dma);
+    printk("\nVirtual address of TX buffer = %p, physical address of TX buffer = %016llx\n",(void*)card->tx_ring->host_tx_dne_ptr, card->tx_ring->host_tx_dne_dma);
+    printk("\nVirtual address of RX buffer = %p, physical address of RX buffer = %016llx\n",(void*)card->rx_ring->host_rx_dne_ptr, card->rx_ring->host_rx_dne_dma);
    
-    if( (card->host_rx_dne_ptr == NULL) ||
-        (card->host_tx_dne_ptr == NULL) ){
+    if( (card->rx_ring->host_rx_dne_ptr == NULL) ||
+        (card->tx_ring->host_tx_dne_ptr == NULL) ){
         
         printk(KERN_ERR "nf10: cannot allocate dma buffer\n");
         goto err_out_free_private2;
     }
 
     // set host buffer addresses
-    *(((uint64_t*)card->cfg_addr)+16) = card->host_tx_dne_dma;
+    *(((uint64_t*)card->cfg_addr)+16) = card->tx_ring->host_tx_dne_dma;
     *(((uint64_t*)card->cfg_addr)+17) = card->tx_ring->tx_dne_mask;
-    *(((uint64_t*)card->cfg_addr)+18) = card->host_rx_dne_dma;
-    *(((uint64_t*)card->cfg_addr)+19) = card->rx_dne_mask;
+    *(((uint64_t*)card->cfg_addr)+18) = card->rx_ring->host_rx_dne_dma;
+    *(((uint64_t*)card->cfg_addr)+19) = card->rx_ring->rx_dne_mask;
 
     // init mem buffers
     card->tx_ring->mem_tx_dsc.wr_ptr = 0;
@@ -249,32 +266,36 @@ static int __devinit nf10_probe(struct pci_dev *pdev, const struct pci_device_id
     atomic64_set(&card->tx_ring->mem_tx_pkt.cnt, 0);
     card->tx_ring->mem_tx_pkt.mask = card->tx_ring->tx_pkt_mask;
     card->tx_ring->mem_tx_pkt.cl_size = (card->tx_ring->tx_pkt_mask+1)/64;
-    card->mem_rx_dsc.wr_ptr = 0;
-    card->mem_rx_dsc.rd_ptr = 0;
-    atomic64_set(&card->mem_rx_dsc.cnt, 0);
-    card->mem_rx_dsc.mask = card->rx_dsc_mask;
-    card->mem_rx_dsc.cl_size = (card->rx_dsc_mask+1)/64;
-    card->mem_rx_pkt.wr_ptr = 0;
-    card->mem_rx_pkt.rd_ptr = 0;
-    atomic64_set(&card->mem_rx_pkt.cnt, 0);
-    card->mem_rx_pkt.mask = card->rx_pkt_mask;
-    card->mem_rx_pkt.cl_size = (card->rx_pkt_mask+1)/64;
+    card->rx_ring->mem_rx_dsc.wr_ptr = 0;
+    card->rx_ring->mem_rx_dsc.rd_ptr = 0;
+    atomic64_set(&card->rx_ring->mem_rx_dsc.cnt, 0);
+    card->rx_ring->mem_rx_dsc.mask = card->rx_ring->rx_dsc_mask;
+    card->rx_ring->mem_rx_dsc.cl_size = (card->rx_ring->rx_dsc_mask+1)/64;
+    card->rx_ring->mem_rx_pkt.wr_ptr = 0;
+    card->rx_ring->mem_rx_pkt.rd_ptr = 0;
+    atomic64_set(&card->rx_ring->mem_rx_pkt.cnt, 0);
+    card->rx_ring->mem_rx_pkt.mask = card->rx_ring->rx_pkt_mask;
+    card->rx_ring->mem_rx_pkt.cl_size = (card->rx_ring->rx_pkt_mask+1)/64;
     card->tx_ring->host_tx_dne.wr_ptr = 0;
     card->tx_ring->host_tx_dne.rd_ptr = 0;
     atomic64_set(&card->tx_ring->host_tx_dne.cnt, 0);
     card->tx_ring->host_tx_dne.mask = card->tx_ring->tx_dne_mask;
     card->tx_ring->host_tx_dne.cl_size = (card->tx_ring->tx_dne_mask+1)/64;
-    card->host_rx_dne.wr_ptr = 0;
-    card->host_rx_dne.rd_ptr = 0;
-    atomic64_set(&card->host_rx_dne.cnt, 0);
-    card->host_rx_dne.mask = card->rx_dne_mask;
-    card->host_rx_dne.cl_size = (card->rx_dne_mask+1)/64;
+    card->rx_ring->host_rx_dne.wr_ptr = 0;
+    card->rx_ring->host_rx_dne.rd_ptr = 0;
+    atomic64_set(&card->rx_ring->host_rx_dne.cnt, 0);
+    card->rx_ring->host_rx_dne.mask = card->rx_ring->rx_dne_mask;
+    card->rx_ring->host_rx_dne.cl_size = (card->rx_ring->rx_dne_mask+1)/64;
     
-    for(i = 0; i < card->tx_ring->host_tx_dne.cl_size; i++)
-        *(((uint32_t*)card->host_tx_dne_ptr) + i * 16) = 0xffffffff;
+    for(i = 0; i < card->tx_ring->host_tx_dne.cl_size; i++){
+        *(((uint32_t*)card->tx_ring->host_tx_dne_ptr) + i * 16) = 0xffffffff;
+        printk("%s: Add: %p Val: %x\n",__FUNCTION__, (void*)(((uint32_t*)card->tx_ring->host_tx_dne_ptr) + i * 16), *(((uint32_t*)card->tx_ring->host_tx_dne_ptr) + i * 16));
+    }
 
-    for(i = 0; i < card->host_rx_dne.cl_size; i++)
-        *(((uint64_t*)card->host_rx_dne_ptr) + i * 8 + 7) = 0xffffffffffffffffULL;
+    for(i = 0; i < card->rx_ring->host_rx_dne.cl_size; i++){
+        *(((uint64_t*)card->rx_ring->host_rx_dne_ptr) + i * 8 + 7) = 0xffffffffffffffffULL;
+	printk("%s: Add: %p  Val: %016llx\n",__FUNCTION__, (((uint64_t*)card->rx_ring->host_rx_dne_ptr) + i * 8 + 7), *(((uint64_t*)card->rx_ring->host_rx_dne_ptr) + i * 8 + 7));
+    }
 
     // initialize work queue
     if(!(card->wq = create_workqueue("int_hndlr"))){
@@ -289,9 +310,9 @@ static int __devinit nf10_probe(struct pci_dev *pdev, const struct pci_device_id
     card->tx_bk_size = (uint64_t*)kmalloc(card->tx_ring->mem_tx_dsc.cl_size*sizeof(uint64_t), GFP_KERNEL);
     card->tx_bk_port = (uint64_t*)kmalloc(card->tx_ring->mem_tx_dsc.cl_size*sizeof(uint64_t), GFP_KERNEL);
 
-    card->rx_bk_skb = (struct sk_buff**)kmalloc(card->mem_rx_dsc.cl_size*sizeof(struct sk_buff*), GFP_KERNEL);
-    card->rx_bk_dma_addr = (uint64_t*)kmalloc(card->mem_rx_dsc.cl_size*sizeof(uint64_t), GFP_KERNEL);
-    card->rx_bk_size = (uint64_t*)kmalloc(card->mem_rx_dsc.cl_size*sizeof(uint64_t), GFP_KERNEL);
+    card->rx_bk_skb = (struct sk_buff**)kmalloc(card->rx_ring->mem_rx_dsc.cl_size*sizeof(struct sk_buff*), GFP_KERNEL);
+    card->rx_bk_dma_addr = (uint64_t*)kmalloc(card->rx_ring->mem_rx_dsc.cl_size*sizeof(uint64_t), GFP_KERNEL);
+    card->rx_bk_size = (uint64_t*)kmalloc(card->rx_ring->mem_rx_dsc.cl_size*sizeof(uint64_t), GFP_KERNEL);
     
     if(card->tx_bk_skb == NULL || card->tx_bk_dma_addr == NULL || card->tx_bk_size == NULL || card->tx_bk_port == NULL ||
        card->rx_bk_skb == NULL || card->rx_bk_dma_addr == NULL || card->rx_bk_size == NULL){
@@ -328,11 +349,11 @@ static int __devinit nf10_probe(struct pci_dev *pdev, const struct pci_device_id
     if(card->rx_bk_dma_addr) kfree(card->rx_bk_dma_addr);
     if(card->rx_bk_skb) kfree(card->rx_bk_skb);
     if(card->rx_bk_size) kfree(card->rx_bk_size);
-    pci_free_consistent(pdev, card->tx_ring->tx_dne_mask+1, card->host_tx_dne_ptr, card->host_tx_dne_dma);
-    pci_free_consistent(pdev, card->rx_dne_mask+1, card->host_rx_dne_ptr, card->host_rx_dne_dma);
+    pci_free_consistent(pdev, card->tx_ring->tx_dne_mask+1, card->tx_ring->host_tx_dne_ptr, card->tx_ring->host_tx_dne_dma);
+    pci_free_consistent(pdev, card->rx_ring->rx_dne_mask+1, card->rx_ring->host_rx_dne_ptr, card->rx_ring->host_rx_dne_dma);
  err_out_iounmap:
     if(card->tx_ring->tx_dsc) iounmap(card->tx_ring->tx_dsc);
-    if(card->rx_dsc) iounmap(card->rx_dsc);
+    if(card->rx_ring->rx_dsc) iounmap(card->rx_ring->rx_dsc);
     if(card->cfg_addr)   iounmap(card->cfg_addr);
 	pci_set_drvdata(pdev, NULL);
 	kfree(card);
@@ -362,10 +383,10 @@ static void __devexit nf10_remove(struct pci_dev *pdev){
         if(card->cfg_addr) iounmap(card->cfg_addr);
 
         if(card->tx_ring->tx_dsc) iounmap(card->tx_ring->tx_dsc);
-        if(card->rx_dsc) iounmap(card->rx_dsc);
+        if(card->rx_ring->rx_dsc) iounmap(card->rx_ring->rx_dsc);
 
-        pci_free_consistent(pdev, card->tx_ring->tx_dne_mask+1, card->host_tx_dne_ptr, card->host_tx_dne_dma);
-        pci_free_consistent(pdev, card->rx_dne_mask+1, card->host_rx_dne_ptr, card->host_rx_dne_dma);
+        pci_free_consistent(pdev, card->tx_ring->tx_dne_mask+1, card->tx_ring->host_tx_dne_ptr, card->tx_ring->host_tx_dne_dma);
+        pci_free_consistent(pdev, card->rx_ring->rx_dne_mask+1, card->rx_ring->host_rx_dne_ptr, card->rx_ring->host_rx_dne_dma);
 
         if(card->tx_bk_dma_addr) kfree(card->tx_bk_dma_addr);
         if(card->tx_bk_skb) kfree(card->tx_bk_skb);
