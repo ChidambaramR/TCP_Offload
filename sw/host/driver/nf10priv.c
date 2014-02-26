@@ -13,7 +13,7 @@
  *
  *  Description:
  *        These functions control the card tx/rx operation. 
- *        nf10priv_xmit -- gets called for every transmitted packet
+ *        nf10priv_xmit i- gets called for every transmitted packet
  *                         (on any nf interface)
  *        work_handler  -- gets called when the interrupt handler puts work
  *                         on the queue
@@ -71,8 +71,9 @@
 #include <net/tcp.h>
 
 #define SK_BUFF_ALLOC_SIZE  1533
-#define NF10_GET_DESC(R, i, type)   (&(((struct type*)(R->tx_dsc))[i]))
-#define NF10_TX_DESC(R, i)  NF10_GET_DESC(R, i, nf10_tx_desc)
+#define NF10_GET_DESC(R, i, dsc, type)   (&(((struct type*)(R->dsc))[i]))
+#define NF10_TX_DESC(R, i)  NF10_GET_DESC(R, i, tx_dsc, nf10_tx_desc)
+#define NF10_RX_DESC(R, i)  NF10_GET_DESC(R, i, rx_dsc, nf10_rx_desc)
 
 //#define LOOPBACK_MODE
 
@@ -174,7 +175,7 @@ int nf10priv_xmit(struct nf10_card *card, struct sk_buff *skb, int port){
 
     tx_desc = (struct nf10_tx_desc*)NF10_TX_DESC(card->tx_ring, dsc_index);
 
-	printk("writing to device");
+	//printk("writing to device");
 
     mb();
     tx_desc->cmd_word = dsc_l0;
@@ -335,6 +336,13 @@ void work_handler(struct work_struct *w){
                 if(skb->protocol == htons(ETH_P_IP)){
                     ((uint8_t*)skb->data)[14] ^= 0x1;
                     ((uint8_t*)skb->data)[18] ^= 0x1;
+
+		    /* 
+		    Computes the checksum on the IP header
+		    Precisely this is the IP checksum calculation by the device. 
+                    The driver computes the checksum and tells the stack that checksum has been
+		    calculated and updates the information with CHECKSUM_PARTIAL.
+		    */
                     ip_send_check(iph);
                     if(((uint8_t*)skb->data)[9] == 6){
                         memset(&sck, 0, sizeof(sck));
@@ -344,6 +352,9 @@ void work_handler(struct work_struct *w){
                         isck = inet_sk(&sck);
                         isck->inet_saddr = iph->saddr;
                         isck->inet_daddr = iph->daddr;
+			/*
+			Calculation of TCP checksum by the driver
+			*/
                         tcp_v4_send_check(&sck, skb);
                     }
 
@@ -351,7 +362,11 @@ void work_handler(struct work_struct *w){
                         ((uint8_t*)skb->data)[26] = 0;
                         ((uint8_t*)skb->data)[27] = 0;
                     }
-               
+              	    /*
+                    The netif_receive_skb function sets the pointer to the L3 protocol (skb->nh) at the 
+		    end of the L2 header. IP layer functions can therefore safely cast it to an iphdr structure.
+		    It is used to process ingress packets. 
+		    */ 
                     netif_receive_skb(skb);
                     
                 }
@@ -402,6 +417,7 @@ int nf10priv_send_rx_dsc(struct nf10_card *card){
     unsigned long flags;
     uint64_t dsc_l0, dsc_l1;
 
+    struct nf10_rx_desc *rx_desc;
     // packet buffer management
     spin_lock_irqsave(&rx_dsc_lock, flags);
 
@@ -488,12 +504,23 @@ int nf10priv_send_rx_dsc(struct nf10_card *card){
     */
 
 
+    rx_desc = (struct nf10_rx_desc*)NF10_RX_DESC(card->rx_ring, dsc_index);
+
+	//printk("writing to device");
+
+    printk("Using my changed\n");
+    mb();
+    rx_desc->cmd_word = dsc_l0;
+    rx_desc->buffer_addr = dsc_l1;
+    mb();
 
     // write to the card
+    /*
     mb();
     *(((uint64_t*)card->rx_ring->rx_dsc) + 8 * dsc_index + 0) = dsc_l0;
     *(((uint64_t*)card->rx_ring->rx_dsc) + 8 * dsc_index + 1) = dsc_l1;
     mb();
+    */
 
     return 0;
 }

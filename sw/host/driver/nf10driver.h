@@ -69,6 +69,13 @@ struct nf10_tx_desc{
     uint64_t buffer_addr;
 } __attribute__ ((aligned(64)));
 
+
+struct nf10_rx_desc{
+    uint64_t cmd_word;
+    uint64_t buffer_addr;
+} __attribute__ ((aligned(64)));
+
+
 // TX ring structure
 struct nf10_tx_ring{
     volatile void *tx_dsc;     // kernel virtual address of the card tx descriptor space
@@ -86,7 +93,7 @@ struct nf10_tx_ring{
 };
 
 struct nf10_rx_ring{
-    volatile void *rx_dsc;
+    volatile void *rx_dsc;	// kernel virtual address of the card rx descriptor space
     uint64_t rx_dsc_mask;
     uint64_t rx_pkt_mask;
     uint64_t rx_dne_mask;
