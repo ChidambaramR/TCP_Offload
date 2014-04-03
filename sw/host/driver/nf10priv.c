@@ -63,6 +63,7 @@
 #include "nf10priv.h"
 #include <linux/spinlock.h>
 #include <linux/pci.h>
+#include <linux/stacktrace.h>
 
 #include <linux/netdevice.h>
 #include <linux/etherdevice.h>
@@ -75,6 +76,16 @@
 #define NF10_TX_DESC(R, i)  NF10_GET_DESC(R, i, tx_dsc, nf10_tx_desc)
 #define NF10_RX_DESC(R, i)  NF10_GET_DESC(R, i, rx_dsc, nf10_rx_desc)
 
+#define NO_ENTRIES 100
+
+unsigned long stack_entries[NO_ENTRIES];
+struct stack_trace trace = {
+	.nr_entries = 0,
+	.entries = &stack_entries[0],
+	.max_entries = NO_ENTRIES-1,
+	.skip = 0
+};
+
 //#define LOOPBACK_MODE
 
 static DEFINE_SPINLOCK(tx_lock);
@@ -84,6 +95,24 @@ static DEFINE_SPINLOCK(rx_dsc_lock);
 int mydbg = 0;
 
 DECLARE_WORK(wq, work_handler);
+
+int nf10_tx_csum(struct nf10_tx_ring *tx_ring, struct sk_buff *skb){
+	uint8_t css;
+	//uint32_t cmd_len = NF10_TXD_CMD_DEXT;
+
+	printk("hooo\n");
+	save_stack_trace(&trace);
+	if(skb->ip_summed != CHECKSUM_PARTIAL)
+		return 0;
+
+	switch(skb->protocol){
+		default: printk("Hula. here!!");
+	}
+
+	return 0;
+}
+
+
 
 int nf10priv_xmit(struct nf10_card *card, struct sk_buff *skb, int port){
     uint8_t* data = skb->data;
@@ -96,6 +125,9 @@ int nf10priv_xmit(struct nf10_card *card, struct sk_buff *skb, int port){
     uint64_t dsc_l0, dsc_l1;
     uint64_t dma_addr;
     struct nf10_tx_desc *tx_desc;
+    uint64_t lenn = cl_size*64;
+    struct tcphdr *tcp_header = NULL; 
+    struct iphdr *ip_header = NULL;
 
     if(len > 1514)
         printk(KERN_ERR "nf10: ERROR too big packet. TX size: %d\n", len);
@@ -103,6 +135,23 @@ int nf10priv_xmit(struct nf10_card *card, struct sk_buff *skb, int port){
     // packet buffer management
     spin_lock_irqsave(&tx_lock, flags);
 
+    if(nf10_tx_csum(card->tx_ring, skb) == 0){
+	printk("Returning -1 because PARTIAL is not set");
+	return -1;
+    }
+
+    ip_header = (struct iphdr *)skb_network_header(skb);
+    if(!ip_header){
+    	printk("Invalid IP header\n");
+	return -1;
+    }
+    printk("IP checksum = %x\n",ip_header->check);
+    if(ip_header->protocol == IPPROTO_TCP){
+    	tcp_header= (struct tcphdr *)((__u32 *)ip_header+ ip_header->ihl);
+	if(tcp_header){
+	    printk("TCP checksum = %x\n",tcp_header->check);
+	}
+    }
     //printk("hello world  ");
 
     // make sure we fit in the descriptor ring and packet buffer
@@ -159,6 +208,7 @@ int nf10priv_xmit(struct nf10_card *card, struct sk_buff *skb, int port){
 
     // fix address for alignment issues
     pkt_addr_fixed = pkt_addr + (dma_addr & 0x3fULL);
+    printk("dma_addr = %016llx, pkt_addr = %016llx \npkt_addr_fixed = %016llx dsc_addr = %016llx pkt length = %016llx\n\n ",dma_addr, pkt_addr, pkt_addr_fixed, dsc_addr, lenn);
 
     // prepare TX descriptor
     dsc_l0 = ((uint64_t)len << 48) + ((uint64_t)port_decoded << 32) + (pkt_addr_fixed & 0xffffffff);
@@ -176,9 +226,10 @@ int nf10priv_xmit(struct nf10_card *card, struct sk_buff *skb, int port){
     tx_desc = (struct nf10_tx_desc*)NF10_TX_DESC(card->tx_ring, dsc_index);
 
 	//printk("writing to device");
-
+  
+    // This is a memory barrier. This prevents compiler optimizations across the barrier. 
     mb();
-    tx_desc->cmd_word = dsc_l0;
+    tx_desc->upper_word.cmd_word = dsc_l0;
     tx_desc->buffer_addr = dsc_l1;
     mb();
     /*

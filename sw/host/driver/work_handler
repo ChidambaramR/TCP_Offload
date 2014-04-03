@@ -1,0 +1,26 @@
+[root@newbelgium driver]# dmesg
+[289157.828027] writing to deviceADD: host_tx_dne_ptr ffff88003e976000, VAL: host_tx_dne_ptr 1
+[289157.828049] ADD: host_rx_dne_ptr ffff88003e975000, VAL: host_rx_dne_ptr 0000000000000000
+[289157.828051] writing to deviceADD: tx_int = ffff88003e976000, VAL: tx_int = 1
+[289157.828053] ADD: rx_int = ffff88003e975038, VAL: tx_int = ffffffffffffffff
+[289157.828058] ADD: host_tx_dne_ptr ffff88003e976000, VAL: host_tx_dne_ptr ffffffff
+[289157.828060] ADD: host_rx_dne_ptr ffff88003e975000, VAL: host_rx_dne_ptr 0000000000000000
+[289157.828061] ADD: tx_int = ffff88003e976040, VAL: tx_int = 1
+[289157.828063] ADD: rx_int = ffff88003e975038, VAL: tx_int = ffffffffffffffff
+[289157.828065] ADD: host_tx_dne_ptr ffff88003e976000, VAL: host_tx_dne_ptr ffffffff
+[289157.828065] ADD: host_rx_dne_ptr ffff88003e975000, VAL: host_rx_dne_ptr 0000000000000000
+[289157.828065] ADD: tx_int = ffff88003e976080, VAL: tx_int = ffffffff
+[289157.828065] ADD: rx_int = ffff88003e975038, VAL: tx_int = ffffffffffffffff
+[289157.828065] ADD: host_tx_dne_ptr ffff88003e976000, VAL: host_tx_dne_ptr ffffffff
+[289157.828065] ADD: host_rx_dne_ptr ffff88003e975000, VAL: host_rx_dne_ptr 0000000000000000
+[289157.828065] ADD: tx_int = ffff88003e976080, VAL: tx_int = ffffffff
+[289157.828065] ADD: rx_int = ffff88003e975038, VAL: tx_int = ffffffffffffffff
+[289157.828065] ADD: host_tx_dne_ptr ffff88003e976000, VAL: host_tx_dne_ptr ffffffff
+[289157.828065] ADD: host_rx_dne_ptr ffff88003e975000, VAL: host_rx_dne_ptr 0000000000000000
+[289157.828065] ADD: tx_int = ffff88003e976080, VAL: tx_int = ffffffff
+[289157.828065] ADD: rx_int = ffff88003e975038, VAL: tx_int = ffffffffffffffff
+[289158.062078] writing to devicewriting to devicewriting to devicewriting to devicewriting to devicewriting to device
+[289158.404161] nf0: IPv6 duplicate address fe80::24e:46ff:fe31:3000 detected!
+[289158.621692] writing to devicewriting to devicewriting to devicewriting to devicewriting to devicewriting to devicewritin
+g to devicewriting to devicewriting to devicewriting to devicewriting to devicewriting to devicewriting to devicewriting to 
+devicewriting to device                                                     

@@ -65,7 +65,14 @@ struct my_work_t{
 };
 
 struct nf10_tx_desc{
-    uint64_t cmd_word;
+    union{
+    	uint64_t cmd_word;
+	struct{
+		uint16_t length;
+		uint16_t port;
+		uint32_t pkt_addr;
+	}cmd_fields;
+    }upper_word;
     uint64_t buffer_addr;
 } __attribute__ ((aligned(64)));
 
@@ -108,6 +115,30 @@ struct nf10_rx_ring{
 };
 
 
+struct nf10_context_desc{
+    union {
+	uint32_t ip_config;
+	struct{
+	   unsigned char ipcss; // IP checksum start
+	   unsigned char ipcso; // IP Checksum offset
+	   uint16_t ipcse; 	// IP Checksum end
+	} ip_fields;
+    } lower_word; 
+    union {
+	uint32_t tcpudp_config;
+	struct{
+	   unsigned char tcpudp_css; // IP checksum start
+	   unsigned char tcpudp_cso; // IP Checksum offset
+	   uint16_t tcpudp_cse; 	// IP Checksum end
+	};
+    } upper_word; 
+
+    uint32_t cmd_and_length;
+    uint32_t reserved;
+
+};
+
+
 struct nf10_card{
     struct workqueue_struct *wq;
     struct my_work_t work;
@@ -136,5 +167,6 @@ struct nf10_ndev_priv{
     int port_up;
 };
 
+typedef uint64_t nf10_features_t;
 
 #endif

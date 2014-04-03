@@ -1,0 +1,1093 @@
+[1726853.044114] 
+[1726853.044114] 
+[1726853.044114] New Cycle:
+[1726853.044119] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr 1
+[1726853.044121] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726853.044123] ADD: tx_int = ffff8800073f7000, VAL: tx_int = 1
+[1726853.044125] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726853.044129] 
+[1726853.044129] 
+[1726853.044129] New Cycle:
+[1726853.044133] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726853.044135] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726853.044137] ADD: tx_int = ffff8800073f7040, VAL: tx_int = 1
+[1726853.044139] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726853.044141] 
+[1726853.044141] 
+[1726853.044141] New Cycle:
+[1726853.044144] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726853.044146] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726853.044148] ADD: tx_int = ffff8800073f7080, VAL: tx_int = ffffffff
+[1726853.044150] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726853.044151] 
+[1726853.044151] 
+[1726853.044151] New Cycle:
+[1726853.044154] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726853.044156] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726853.044158] ADD: tx_int = ffff8800073f7080, VAL: tx_int = ffffffff
+[1726853.044160] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726853.044162] 
+[1726853.044162] 
+[1726853.044162] New Cycle:
+[1726853.044165] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726853.044167] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726853.044169] ADD: tx_int = ffff8800073f7080, VAL: tx_int = ffffffff
+[1726853.044171] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726853.044085] dma_addr = 0000000098f07802, pkt_addr = 0000000000000000 
+[1726853.044085] pkt_addr_fixed = 0000000000000002 dsc_addr = 0000000000000000 pkt length = 00000000000000c0
+[1726853.044085] 
+[1726853.044085]  dma_addr = 0000000098f01002, pkt_addr = 00000000000000c0 
+[1726853.044085] pkt_addr_fixed = 00000000000000c2 dsc_addr = 0000000000000040 pkt length = 0000000000000080
+[1726853.044085] 
+[1726853.044085]  
+[1726853.137822] dma_addr = 000000000bb07602, pkt_addr = 0000000000000140 
+[1726853.137822] pkt_addr_fixed = 0000000000000142 dsc_addr = 0000000000000080 pkt length = 00000000000000c0
+[1726853.137822] 
+[1726853.137822]  
+[1726853.137850] 
+[1726853.137850] New Cycle:
+[1726853.137854] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726853.137856] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726853.137858] ADD: tx_int = ffff8800073f7080, VAL: tx_int = 1
+[1726853.137860] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726853.137863] 
+[1726853.137863] 
+[1726853.137863] New Cycle:
+[1726853.137866] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726853.137868] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726853.137870] ADD: tx_int = ffff8800073f70c0, VAL: tx_int = ffffffff
+[1726853.137872] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726853.137874] 
+[1726853.137874] 
+[1726853.137874] New Cycle:
+[1726853.137877] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726853.137879] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726853.137881] ADD: tx_int = ffff8800073f70c0, VAL: tx_int = ffffffff
+[1726853.137883] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726853.152087] 
+[1726853.152087] 
+[1726853.152087] New Cycle:
+[1726853.152091] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726853.152093] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726853.152095] ADD: tx_int = ffff8800073f70c0, VAL: tx_int = 1
+[1726853.152097] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726853.152100] 
+[1726853.152100] 
+[1726853.152100] New Cycle:
+[1726853.152103] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726853.152105] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726853.152107] ADD: tx_int = ffff8800073f7100, VAL: tx_int = ffffffff
+[1726853.152109] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726853.152111] 
+[1726853.152111] 
+[1726853.152111] New Cycle:
+[1726853.152114] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726853.152116] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726853.152118] ADD: tx_int = ffff8800073f7100, VAL: tx_int = ffffffff
+[1726853.152120] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726853.152078] dma_addr = 0000000098f00802, pkt_addr = 0000000000000200 
+[1726853.152078] pkt_addr_fixed = 0000000000000202 dsc_addr = 00000000000000c0 pkt length = 00000000000000c0
+[1726853.152078] 
+[1726853.152078]  
+[1726853.159029] dma_addr = 000000007703f002, pkt_addr = 00000000000002c0 
+[1726853.159029] pkt_addr_fixed = 00000000000002c2 dsc_addr = 0000000000000100 pkt length = 0000000000000140
+[1726853.159029] 
+[1726853.159029]  
+[1726853.159053] 
+[1726853.159053] New Cycle:
+[1726853.159057] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726853.159059] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726853.159061] ADD: tx_int = ffff8800073f7100, VAL: tx_int = 1
+[1726853.159063] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726853.159065] 
+[1726853.159065] 
+[1726853.159065] New Cycle:
+[1726853.159069] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726853.159071] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726853.159073] ADD: tx_int = ffff8800073f7140, VAL: tx_int = ffffffff
+[1726853.159075] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726853.159076] 
+[1726853.159076] 
+[1726853.159076] New Cycle:
+[1726853.159079] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726853.159081] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726853.159083] ADD: tx_int = ffff8800073f7140, VAL: tx_int = ffffffff
+[1726853.159085] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726853.160246] 
+[1726853.160246] 
+[1726853.160246] New Cycle:
+[1726853.160250] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726853.160252] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726853.160254] ADD: tx_int = ffff8800073f7140, VAL: tx_int = 1
+[1726853.160256] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726853.160259] 
+[1726853.160259] 
+[1726853.160259] New Cycle:
+[1726853.160262] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726853.160264] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726853.160266] ADD: tx_int = ffff8800073f7180, VAL: tx_int = ffffffff
+[1726853.160268] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726853.160270] 
+[1726853.160270] 
+[1726853.160270] New Cycle:
+[1726853.160273] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726853.160275] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726853.160277] ADD: tx_int = ffff8800073f7180, VAL: tx_int = ffffffff
+[1726853.160279] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726853.410183] 
+[1726853.410183] 
+[1726853.410183] New Cycle:
+[1726853.410187] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726853.410189] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726853.410191] ADD: tx_int = ffff8800073f7180, VAL: tx_int = 1
+[1726853.410193] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726853.410196] 
+[1726853.410196] 
+[1726853.410196] New Cycle:
+[1726853.410199] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726853.410201] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726853.410203] ADD: tx_int = ffff8800073f71c0, VAL: tx_int = ffffffff
+[1726853.410205] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726853.410207] 
+[1726853.410207] 
+[1726853.410207] New Cycle:
+[1726853.410210] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726853.410212] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726853.410214] ADD: tx_int = ffff8800073f71c0, VAL: tx_int = ffffffff
+[1726853.410216] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726853.661150] 
+[1726853.661150] 
+[1726853.661150] New Cycle:
+[1726853.661154] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726853.661156] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726853.661158] ADD: tx_int = ffff8800073f71c0, VAL: tx_int = 1
+[1726853.661160] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726853.661163] 
+[1726853.661163] 
+[1726853.661163] New Cycle:
+[1726853.661166] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726853.661169] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726853.661171] ADD: tx_int = ffff8800073f7200, VAL: tx_int = ffffffff
+[1726853.661173] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726853.661174] 
+[1726853.661174] 
+[1726853.661174] New Cycle:
+[1726853.661178] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726853.661180] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726853.661182] ADD: tx_int = ffff8800073f7200, VAL: tx_int = ffffffff
+[1726853.661184] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726853.861880] 
+[1726853.861880] 
+[1726853.861880] New Cycle:
+[1726853.861885] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726853.861887] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726853.861889] ADD: tx_int = ffff8800073f7200, VAL: tx_int = 1
+[1726853.861891] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726853.861894] 
+[1726853.861894] 
+[1726853.861894] New Cycle:
+[1726853.861897] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726853.861899] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726853.861901] ADD: tx_int = ffff8800073f7240, VAL: tx_int = ffffffff
+[1726853.861903] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726853.861905] 
+[1726853.861905] 
+[1726853.861905] New Cycle:
+[1726853.861908] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726853.861910] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726853.861912] ADD: tx_int = ffff8800073f7240, VAL: tx_int = ffffffff
+[1726853.861914] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726853.160225] dma_addr = 000000007703a002, pkt_addr = 0000000000000400 
+[1726853.160225] pkt_addr_fixed = 0000000000000402 dsc_addr = 0000000000000140 pkt length = 0000000000000180
+[1726853.160225] 
+[1726853.160225]  dma_addr = 000000007703fc02, pkt_addr = 0000000000000580 
+[1726853.160225] pkt_addr_fixed = 0000000000000582 dsc_addr = 0000000000000180 pkt length = 0000000000000180
+[1726853.160225] 
+[1726853.160225]  dma_addr = 0000000077038802, pkt_addr = 0000000000000700 
+[1726853.160225] pkt_addr_fixed = 0000000000000702 dsc_addr = 00000000000001c0 pkt length = 0000000000000180
+[1726853.160225] 
+[1726853.160225]  dma_addr = 000000007703d002, pkt_addr = 0000000000000880 
+[1726853.160225] pkt_addr_fixed = 0000000000000882 dsc_addr = 0000000000000200 pkt length = 0000000000000180
+[1726853.160225] 
+[1726853.160225]  
+[1726853.980078] dma_addr = 000000000bb07c02, pkt_addr = 0000000000000a00 
+[1726853.980078] pkt_addr_fixed = 0000000000000a02 dsc_addr = 0000000000000240 pkt length = 00000000000000c0
+[1726853.980078] 
+[1726853.980078]  
+[1726853.980104] 
+[1726853.980104] New Cycle:
+[1726853.980108] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726853.980110] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726853.980112] ADD: tx_int = ffff8800073f7240, VAL: tx_int = 1
+[1726853.980114] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726853.980117] 
+[1726853.980117] 
+[1726853.980117] New Cycle:
+[1726853.980120] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726853.980122] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726853.980124] ADD: tx_int = ffff8800073f7280, VAL: tx_int = ffffffff
+[1726853.980126] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726853.980128] 
+[1726853.980128] 
+[1726853.980128] New Cycle:
+[1726853.980131] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726853.980133] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726853.980135] ADD: tx_int = ffff8800073f7280, VAL: tx_int = ffffffff
+[1726853.980137] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726854.138394] 
+[1726854.138394] 
+[1726854.138394] New Cycle:
+[1726854.138399] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726854.138401] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726854.138403] ADD: tx_int = ffff8800073f7280, VAL: tx_int = 1
+[1726854.138405] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726854.138409] 
+[1726854.138409] 
+[1726854.138409] New Cycle:
+[1726854.138412] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726854.138414] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726854.138416] ADD: tx_int = ffff8800073f72c0, VAL: tx_int = ffffffff
+[1726854.138418] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726854.138420] 
+[1726854.138420] 
+[1726854.138420] New Cycle:
+[1726854.138423] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726854.138425] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726854.138427] ADD: tx_int = ffff8800073f72c0, VAL: tx_int = ffffffff
+[1726854.138429] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726854.230778] 
+[1726854.230778] 
+[1726854.230778] New Cycle:
+[1726854.230782] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726854.230785] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726854.230787] ADD: tx_int = ffff8800073f72c0, VAL: tx_int = 1
+[1726854.230788] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726854.230792] 
+[1726854.230792] 
+[1726854.230792] New Cycle:
+[1726854.230795] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726854.230797] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726854.230799] ADD: tx_int = ffff8800073f7300, VAL: tx_int = ffffffff
+[1726854.230801] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726854.230803] 
+[1726854.230803] 
+[1726854.230803] New Cycle:
+[1726854.230806] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726854.230808] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726854.230810] ADD: tx_int = ffff8800073f7300, VAL: tx_int = ffffffff
+[1726854.230812] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726854.934068] 
+[1726854.934068] 
+[1726854.934068] New Cycle:
+[1726854.934073] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726854.934075] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726854.934077] ADD: tx_int = ffff8800073f7300, VAL: tx_int = 1
+[1726854.934079] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726854.934082] 
+[1726854.934082] 
+[1726854.934082] New Cycle:
+[1726854.934086] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726854.934088] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726854.934090] ADD: tx_int = ffff8800073f7340, VAL: tx_int = ffffffff
+[1726854.934092] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726854.934093] 
+[1726854.934093] 
+[1726854.934093] New Cycle:
+[1726854.934096] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726854.934098] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726854.934100] ADD: tx_int = ffff8800073f7340, VAL: tx_int = ffffffff
+[1726854.934102] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726854.138373] dma_addr = 000000000bb05402, pkt_addr = 0000000000000ac0 
+[1726854.138373] pkt_addr_fixed = 0000000000000ac2 dsc_addr = 0000000000000280 pkt length = 00000000000000c0
+[1726854.138373] 
+[1726854.138373]  dma_addr = 000000007703c402, pkt_addr = 0000000000000b80 
+[1726854.138373] pkt_addr_fixed = 0000000000000b82 dsc_addr = 00000000000002c0 pkt length = 0000000000000140
+[1726854.138373] 
+[1726854.138373]  dma_addr = 000000007703c802, pkt_addr = 0000000000000cc0 
+[1726854.138373] pkt_addr_fixed = 0000000000000cc2 dsc_addr = 0000000000000300 pkt length = 0000000000000180
+[1726854.138373] 
+[1726854.138373]  
+[1726854.980107] dma_addr = 0000000098f00802, pkt_addr = 0000000000000e40 
+[1726854.980107] pkt_addr_fixed = 0000000000000e42 dsc_addr = 0000000000000340 pkt length = 00000000000000c0
+[1726854.980107] 
+[1726854.980107]  
+[1726854.980135] 
+[1726854.980135] New Cycle:
+[1726854.980138] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726854.980141] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726854.980143] ADD: tx_int = ffff8800073f7340, VAL: tx_int = 1
+[1726854.980145] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726854.980148] 
+[1726854.980148] 
+[1726854.980148] New Cycle:
+[1726854.980152] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726854.980154] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726854.980156] ADD: tx_int = ffff8800073f7380, VAL: tx_int = 1
+[1726854.980157] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726854.980159] 
+[1726854.980159] 
+[1726854.980159] New Cycle:
+[1726854.980162] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726854.980164] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726854.980166] ADD: tx_int = ffff8800073f73c0, VAL: tx_int = ffffffff
+[1726854.980168] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726854.980170] 
+[1726854.980170] 
+[1726854.980170] New Cycle:
+[1726854.980173] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726854.980175] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726854.980177] ADD: tx_int = ffff8800073f73c0, VAL: tx_int = ffffffff
+[1726854.980179] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726854.980180] 
+[1726854.980180] 
+[1726854.980180] New Cycle:
+[1726854.980183] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726854.980185] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726854.980187] ADD: tx_int = ffff8800073f73c0, VAL: tx_int = ffffffff
+[1726854.980189] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726854.980118] dma_addr = 000000000bb04602, pkt_addr = 0000000000000f00 
+[1726854.980118] pkt_addr_fixed = 0000000000000f02 dsc_addr = 0000000000000380 pkt length = 00000000000000c0
+[1726854.980118] 
+[1726854.980118]  
+[1726854.988077] dma_addr = 000000011eccd002, pkt_addr = 0000000000000fc0 
+[1726854.988077] pkt_addr_fixed = 0000000000000fc2 dsc_addr = 00000000000003c0 pkt length = 00000000000000c0
+[1726854.988077] 
+[1726854.988077]  
+[1726854.988099] 
+[1726854.988099] New Cycle:
+[1726854.988103] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726854.988105] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726854.988107] ADD: tx_int = ffff8800073f73c0, VAL: tx_int = 1
+[1726854.988109] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726854.988113] 
+[1726854.988113] 
+[1726854.988113] New Cycle:
+[1726854.988116] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726854.988118] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726854.988120] ADD: tx_int = ffff8800073f7400, VAL: tx_int = ffffffff
+[1726854.988122] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726854.988123] 
+[1726854.988123] 
+[1726854.988123] New Cycle:
+[1726854.988126] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726854.988129] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726854.988131] ADD: tx_int = ffff8800073f7400, VAL: tx_int = ffffffff
+[1726854.988132] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726855.081292] 
+[1726855.081292] 
+[1726855.081292] New Cycle:
+[1726855.081296] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726855.081299] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726855.081301] ADD: tx_int = ffff8800073f7400, VAL: tx_int = 1
+[1726855.081303] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726855.081306] 
+[1726855.081306] 
+[1726855.081306] New Cycle:
+[1726855.081309] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726855.081311] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726855.081313] ADD: tx_int = ffff8800073f7440, VAL: tx_int = ffffffff
+[1726855.081315] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726855.081317] 
+[1726855.081317] 
+[1726855.081317] New Cycle:
+[1726855.081320] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726855.081322] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726855.081324] ADD: tx_int = ffff8800073f7440, VAL: tx_int = ffffffff
+[1726855.081326] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726855.102453] 
+[1726855.102453] 
+[1726855.102453] New Cycle:
+[1726855.102457] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726855.102459] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726855.102461] ADD: tx_int = ffff8800073f7440, VAL: tx_int = 1
+[1726855.102463] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726855.102466] 
+[1726855.102466] 
+[1726855.102466] New Cycle:
+[1726855.102469] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726855.102471] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726855.102473] ADD: tx_int = ffff8800073f7480, VAL: tx_int = ffffffff
+[1726855.102475] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726855.102477] 
+[1726855.102477] 
+[1726855.102477] New Cycle:
+[1726855.102480] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726855.102482] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726855.102484] ADD: tx_int = ffff8800073f7480, VAL: tx_int = ffffffff
+[1726855.102486] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726855.103707] 
+[1726855.103707] 
+[1726855.103707] New Cycle:
+[1726855.103711] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726855.103713] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726855.103715] ADD: tx_int = ffff8800073f7480, VAL: tx_int = 1
+[1726855.103717] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726855.103720] 
+[1726855.103720] 
+[1726855.103720] New Cycle:
+[1726855.103723] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726855.103725] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726855.103727] ADD: tx_int = ffff8800073f74c0, VAL: tx_int = ffffffff
+[1726855.103729] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726855.103731] 
+[1726855.103731] 
+[1726855.103731] New Cycle:
+[1726855.103734] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726855.103736] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726855.103738] ADD: tx_int = ffff8800073f74c0, VAL: tx_int = ffffffff
+[1726855.103740] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726855.103940] 
+[1726855.103940] 
+[1726855.103940] New Cycle:
+[1726855.103944] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726855.103947] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726855.103949] ADD: tx_int = ffff8800073f74c0, VAL: tx_int = 1
+[1726855.103951] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726855.103954] 
+[1726855.103954] 
+[1726855.103954] New Cycle:
+[1726855.103957] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726855.103959] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726855.103961] ADD: tx_int = ffff8800073f7500, VAL: tx_int = ffffffff
+[1726855.103963] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726855.103965] 
+[1726855.103965] 
+[1726855.103965] New Cycle:
+[1726855.103968] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726855.103970] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726855.103972] ADD: tx_int = ffff8800073f7500, VAL: tx_int = ffffffff
+[1726855.103974] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726855.353773] 
+[1726855.353773] 
+[1726855.353773] New Cycle:
+[1726855.353778] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726855.353780] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726855.353782] ADD: tx_int = ffff8800073f7500, VAL: tx_int = 1
+[1726855.353784] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726855.353788] 
+[1726855.353788] 
+[1726855.353788] New Cycle:
+[1726855.353791] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726855.353793] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726855.353795] ADD: tx_int = ffff8800073f7540, VAL: tx_int = ffffffff
+[1726855.353797] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726855.353798] 
+[1726855.353798] 
+[1726855.353798] New Cycle:
+[1726855.353802] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726855.353804] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726855.353806] ADD: tx_int = ffff8800073f7540, VAL: tx_int = ffffffff
+[1726855.081226] dma_addr = 0000000120f0f80a, pkt_addr = 0000000000001080 
+[1726855.081226] pkt_addr_fixed = 000000000000108a dsc_addr = 0000000000000400 pkt length = 00000000000000c0
+[1726855.081226] 
+[1726855.081226]  dma_addr = 000000010512280a, pkt_addr = 0000000000001140 
+[1726855.081226] pkt_addr_fixed = 000000000000114a dsc_addr = 0000000000000440 pkt length = 0000000000000140
+[1726855.081226] 
+[1726855.081226]  dma_addr = 000000010512280a, pkt_addr = 0000000000001280 
+[1726855.081226] pkt_addr_fixed = 000000000000128a dsc_addr = 0000000000000480 pkt length = 0000000000000200
+[1726855.081226] 
+[1726855.081226]  dma_addr = 0000000105124c02, pkt_addr = 0000000000001480 
+[1726855.081226] pkt_addr_fixed = 0000000000001482 dsc_addr = 00000000000004c0 pkt length = 0000000000000140
+[1726855.081226] 
+[1726855.081226]  dma_addr = 0000000105124c0a, pkt_addr = 00000000000015c0 
+ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726855.354008] 
+[1726855.354008] 
+[1726855.354008] New Cycle:
+[1726855.354013] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726855.354015] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726855.354017] ADD: tx_int = ffff8800073f7540, VAL: tx_int = 1
+[1726855.354019] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726855.354022] 
+[1726855.354022] 
+[1726855.354022] New Cycle:
+[1726855.354026] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726855.354028] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726855.354030] ADD: tx_int = ffff8800073f7580, VAL: tx_int = ffffffff
+[1726855.354031] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726855.354033] 
+[1726855.354033] 
+[1726855.354033] New Cycle:
+[1726855.354036] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726855.354038] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726855.354040] ADD: tx_int = ffff8800073f7580, VAL: tx_int = ffffffff
+[1726855.354042] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726855.605011] 
+[1726855.605011] 
+[1726855.605011] New Cycle:
+[1726855.605016] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726855.605018] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726855.605020] ADD: tx_int = ffff8800073f7580, VAL: tx_int = 1
+[1726855.605022] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726855.605025] 
+[1726855.605025] 
+[1726855.605025] New Cycle:
+[1726855.605028] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726855.605030] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726855.605032] ADD: tx_int = ffff8800073f75c0, VAL: tx_int = ffffffff
+[1726855.605034] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726855.605036] 
+[1726855.605036] 
+[1726855.605036] New Cycle:
+[1726855.605039] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726855.605041] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726855.605043] ADD: tx_int = ffff8800073f75c0, VAL: tx_int = ffffffff
+[1726855.605047] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726855.605297] 
+[1726855.605297] 
+[1726855.605297] New Cycle:
+[1726855.605302] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726855.605304] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726855.605306] ADD: tx_int = ffff8800073f75c0, VAL: tx_int = 1
+[1726855.605308] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726855.605311] 
+[1726855.605311] 
+[1726855.605311] New Cycle:
+[1726855.605315] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726855.605317] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726855.605319] ADD: tx_int = ffff8800073f7600, VAL: tx_int = 1
+[1726855.605320] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726855.605322] 
+[1726855.605322] 
+[1726855.605322] New Cycle:
+[1726855.605325] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726855.605327] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726855.605329] ADD: tx_int = ffff8800073f7640, VAL: tx_int = ffffffff
+[1726855.605331] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726855.605333] 
+[1726855.605333] 
+[1726855.605333] New Cycle:
+[1726855.605336] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726855.605338] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726855.605340] ADD: tx_int = ffff8800073f7640, VAL: tx_int = ffffffff
+[1726855.605342] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726855.605343] 
+[1726855.605343] 
+[1726855.605343] New Cycle:
+[1726855.605346] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726855.605348] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726855.605350] ADD: tx_int = ffff8800073f7640, VAL: tx_int = ffffffff
+[1726855.605352] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726855.804977] 
+[1726855.804977] 
+[1726855.804977] New Cycle:
+[1726855.804981] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726855.804983] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726855.804985] ADD: tx_int = ffff8800073f7640, VAL: tx_int = 1
+[1726855.804987] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726855.804990] 
+[1726855.804990] 
+[1726855.804990] New Cycle:
+[1726855.804993] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726855.804995] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726855.804997] ADD: tx_int = ffff8800073f7680, VAL: tx_int = ffffffff
+[1726855.804999] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726855.805001] 
+[1726855.805001] 
+[1726855.805001] New Cycle:
+[1726855.805004] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726855.805006] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726855.805008] ADD: tx_int = ffff8800073f7680, VAL: tx_int = ffffffff
+[1726855.805012] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726855.805019] 
+[1726855.805019] 
+[1726855.805019] New Cycle:
+[1726855.805024] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726855.805026] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726855.805028] ADD: tx_int = ffff8800073f7680, VAL: tx_int = 1
+[1726855.805030] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726855.805032] 
+[1726855.805032] 
+[1726855.805032] New Cycle:
+[1726855.805036] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726855.805038] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726855.805039] ADD: tx_int = ffff8800073f76c0, VAL: tx_int = ffffffff
+[1726855.805041] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726855.805043] 
+[1726855.805043] 
+[1726855.805043] New Cycle:
+[1726855.805046] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726855.805048] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726855.805050] ADD: tx_int = ffff8800073f76c0, VAL: tx_int = ffffffff
+[1726855.805052] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726855.604987] dma_addr = 000000010512280a, pkt_addr = 0000000000001900 
+[1726855.604987] pkt_addr_fixed = 000000000000190a dsc_addr = 0000000000000580 pkt length = 0000000000000200
+[1726855.604987] 
+[1726855.604987]  dma_addr = 0000000105124c02, pkt_addr = 0000000000001b00 
+[1726855.604987] pkt_addr_fixed = 0000000000001b02 dsc_addr = 00000000000005c0 pkt length = 0000000000000140
+[1726855.604987] 
+[1726855.604987]  dma_addr = 0000000120f0ce02, pkt_addr = 0000000000001c40 
+[1726855.604987] pkt_addr_fixed = 0000000000001c42 dsc_addr = 0000000000000600 pkt length = 00000000000000c0
+[1726855.604987] 
+[1726855.604987]  dma_addr = 0000000105124c0a, pkt_addr = 0000000000001d00 
+[1726855.604987] pkt_addr_fixed = 0000000000001d0a dsc_addr = 0000000000000640 pkt length = 00000000000001c0
+[1726855.604987] 
+[1726855.604987]  dma_addr = 0000000105122802, pkt_addr = 0000000000001ec0 
+[1726856.082755] 
+[1726856.082755] New Cycle:
+[1726856.082759] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726856.082761] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726856.082763] ADD: tx_int = ffff8800073f76c0, VAL: tx_int = 1
+[1726856.082765] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726856.082768] 
+[1726856.082768] 
+[1726856.082768] New Cycle:
+[1726856.082771] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726856.082773] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726856.082775] ADD: tx_int = ffff8800073f7700, VAL: tx_int = ffffffff
+[1726856.082777] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726856.082779] 
+[1726856.082779] 
+[1726856.082779] New Cycle:
+[1726856.082782] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726856.082784] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726856.082786] ADD: tx_int = ffff8800073f7700, VAL: tx_int = ffffffff
+[1726856.082788] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726856.139285] 
+[1726856.139285] 
+[1726856.139285] New Cycle:
+[1726856.139290] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726856.139292] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726856.139294] ADD: tx_int = ffff8800073f7700, VAL: tx_int = 1
+[1726856.139296] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726856.139299] 
+[1726856.139299] 
+[1726856.139299] New Cycle:
+[1726856.139303] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726856.139305] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726856.139307] ADD: tx_int = ffff8800073f7740, VAL: tx_int = ffffffff
+[1726856.139309] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726856.139310] 
+[1726856.139310] 
+[1726856.139310] New Cycle:
+[1726856.139313] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726856.139315] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726856.139317] ADD: tx_int = ffff8800073f7740, VAL: tx_int = ffffffff
+[1726856.139319] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726856.174493] 
+[1726856.174493] 
+[1726856.174493] New Cycle:
+[1726856.174497] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726856.174499] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726856.174501] ADD: tx_int = ffff8800073f7740, VAL: tx_int = 1
+[1726856.174502] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726856.174506] 
+[1726856.174506] 
+[1726856.174506] New Cycle:
+[1726856.174509] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726856.174511] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726856.174513] ADD: tx_int = ffff8800073f7780, VAL: tx_int = ffffffff
+[1726856.174515] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726856.174517] 
+[1726856.174517] 
+[1726856.174517] New Cycle:
+[1726856.174520] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726856.174522] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726856.174524] ADD: tx_int = ffff8800073f7780, VAL: tx_int = ffffffff
+[1726856.174526] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726856.303184] 
+[1726856.303184] 
+[1726856.303184] New Cycle:
+[1726856.303188] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726856.303190] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726856.303192] ADD: tx_int = ffff8800073f7780, VAL: tx_int = 1
+[1726856.303194] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726856.303198] 
+[1726856.303198] 
+[1726856.303198] New Cycle:
+[1726856.303201] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726856.303203] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726856.303205] ADD: tx_int = ffff8800073f77c0, VAL: tx_int = ffffffff
+[1726856.303207] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726856.303209] 
+[1726856.303209] 
+[1726856.303209] New Cycle:
+[1726856.303212] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726856.303214] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726856.303216] ADD: tx_int = ffff8800073f77c0, VAL: tx_int = ffffffff
+[1726856.303218] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726856.877460] 
+[1726856.877460] 
+[1726856.877460] New Cycle:
+[1726856.877464] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726856.877466] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726856.877468] ADD: tx_int = ffff8800073f77c0, VAL: tx_int = 1
+[1726856.877470] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726856.877473] 
+[1726856.877473] 
+[1726856.877473] New Cycle:
+[1726856.877476] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726856.877479] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726856.877480] ADD: tx_int = ffff8800073f7000, VAL: tx_int = ffffffff
+[1726856.877482] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726856.877484] 
+[1726856.877484] 
+[1726856.877484] New Cycle:
+[1726856.877487] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726856.877489] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726856.877493] ADD: tx_int = ffff8800073f7000, VAL: tx_int = ffffffff
+[1726856.877495] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726856.877497] 
+[1726856.877497] 
+[1726856.877497] New Cycle:
+[1726856.877500] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr 1
+[1726856.877502] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726856.877504] ADD: tx_int = ffff8800073f7000, VAL: tx_int = 1
+[1726856.877506] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726856.877509] 
+[1726856.877509] 
+[1726856.877509] New Cycle:
+[1726856.877512] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726856.877514] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726856.877516] ADD: tx_int = ffff8800073f7040, VAL: tx_int = ffffffff
+[1726856.877518] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726856.877519] 
+[1726856.877519] 
+[1726856.877519] New Cycle:
+[1726856.877522] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726856.877525] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726856.877527] ADD: tx_int = ffff8800073f7040, VAL: tx_int = ffffffff
+[1726856.877529] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726856.139261] dma_addr = 0000000120f0fe02, pkt_addr = 0000000000002080 
+[1726856.139261] pkt_addr_fixed = 0000000000002082 dsc_addr = 0000000000000700 pkt length = 00000000000000c0
+[1726856.139261] 
+[1726856.139261]  dma_addr = 000000010512280a, pkt_addr = 0000000000002140 
+[1726856.139261] pkt_addr_fixed = 000000000000214a dsc_addr = 0000000000000740 pkt length = 0000000000000140
+[1726856.139261] 
+[1726856.139261]  dma_addr = 0000000105124c02, pkt_addr = 0000000000002280 
+[1726856.139261] pkt_addr_fixed = 0000000000002282 dsc_addr = 0000000000000780 pkt length = 0000000000000180
+[1726856.139261] 
+[1726856.139261]  dma_addr = 000000010512040a, pkt_addr = 0000000000002400 
+[1726856.139261] pkt_addr_fixed = 000000000000240a dsc_addr = 00000000000007c0 pkt length = 00000000000001c0
+[1726856.139261] 
+[1726856.139261]  dma_addr = 0000000105124c02, pkt_addr = 00000000000025c0 
+[1726857.006022] 
+[1726857.006022] New Cycle:
+[1726857.006026] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726857.006028] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726857.006030] ADD: tx_int = ffff8800073f7040, VAL: tx_int = 1
+[1726857.006032] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726857.006035] 
+[1726857.006035] 
+[1726857.006035] New Cycle:
+[1726857.006038] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726857.006040] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726857.006042] ADD: tx_int = ffff8800073f7080, VAL: tx_int = ffffffff
+[1726857.006044] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726857.006045] 
+[1726857.006045] 
+[1726857.006045] New Cycle:
+[1726857.006048] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726857.006050] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726857.006052] ADD: tx_int = ffff8800073f7080, VAL: tx_int = ffffffff
+[1726857.006054] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726858.082617] 
+[1726858.082617] 
+[1726858.082617] New Cycle:
+[1726858.082621] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726858.082624] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726858.082626] ADD: tx_int = ffff8800073f7080, VAL: tx_int = 1
+[1726858.082628] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726858.082632] 
+[1726858.082632] 
+[1726858.082632] New Cycle:
+[1726858.082635] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726858.082637] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726858.082639] ADD: tx_int = ffff8800073f70c0, VAL: tx_int = ffffffff
+[1726858.082641] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726858.082642] 
+[1726858.082642] 
+[1726858.082642] New Cycle:
+[1726858.082645] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726858.082647] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726858.082649] ADD: tx_int = ffff8800073f70c0, VAL: tx_int = ffffffff
+[1726858.082651] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726858.246114] 
+[1726858.246114] 
+[1726858.246114] New Cycle:
+[1726858.246118] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726858.246121] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726858.246123] ADD: tx_int = ffff8800073f70c0, VAL: tx_int = 1
+[1726858.246125] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726858.246128] 
+[1726858.246128] 
+[1726858.246128] New Cycle:
+[1726858.246131] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726858.246133] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726858.246135] ADD: tx_int = ffff8800073f7100, VAL: tx_int = ffffffff
+[1726858.246137] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726858.246139] 
+[1726858.246139] 
+[1726858.246139] New Cycle:
+[1726858.246142] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726858.246144] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726858.246146] ADD: tx_int = ffff8800073f7100, VAL: tx_int = ffffffff
+[1726858.246148] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726858.949309] 
+[1726858.949309] 
+[1726858.949309] New Cycle:
+[1726858.949314] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726858.949316] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726858.949318] ADD: tx_int = ffff8800073f7100, VAL: tx_int = 1
+[1726858.949320] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726858.949323] 
+[1726858.949323] 
+[1726858.949323] New Cycle:
+[1726858.949326] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726858.949329] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726858.949331] ADD: tx_int = ffff8800073f7140, VAL: tx_int = ffffffff
+[1726858.949332] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726858.949334] 
+[1726858.949334] 
+[1726858.949334] New Cycle:
+[1726858.949337] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726858.949339] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726858.949341] ADD: tx_int = ffff8800073f7140, VAL: tx_int = ffffffff
+[1726858.949345] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726858.949523] 
+[1726858.949523] 
+[1726858.949523] New Cycle:
+[1726858.949528] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726858.949530] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726858.949532] ADD: tx_int = ffff8800073f7140, VAL: tx_int = 1
+[1726858.949534] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726858.949538] 
+[1726858.949538] 
+[1726858.949538] New Cycle:
+[1726858.949541] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726858.949543] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726858.949545] ADD: tx_int = ffff8800073f7180, VAL: tx_int = ffffffff
+[1726858.949547] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726858.949549] 
+[1726858.949549] 
+[1726858.949549] New Cycle:
+[1726858.949552] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726858.949554] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726858.949556] ADD: tx_int = ffff8800073f7180, VAL: tx_int = ffffffff
+[1726858.949558] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726858.082594] dma_addr = 0000000120f0f80a, pkt_addr = 0000000000002840 
+[1726858.082594] pkt_addr_fixed = 000000000000284a dsc_addr = 0000000000000080 pkt length = 00000000000000c0
+[1726858.082594] 
+[1726858.082594]  dma_addr = 000000010512280a, pkt_addr = 0000000000002900 
+[1726858.082594] pkt_addr_fixed = 000000000000290a dsc_addr = 00000000000000c0 pkt length = 00000000000001c0
+[1726858.082594] 
+[1726858.082594]  dma_addr = 0000000105124c0a, pkt_addr = 0000000000002ac0 
+[1726858.082594] pkt_addr_fixed = 0000000000002aca dsc_addr = 0000000000000100 pkt length = 00000000000001c0
+[1726858.082594] 
+[1726858.082594]  dma_addr = 0000000105120402, pkt_addr = 0000000000002c80 
+[1726858.082594] pkt_addr_fixed = 0000000000002c82 dsc_addr = 0000000000000140 pkt length = 0000000000000100
+[1726858.082594] 
+[1726858.082594]  
+[1726858.992025] dma_addr = 000000000bb07402, pkt_addr = 0000000000002d80 
+[1726858.992025] pkt_addr_fixed = 0000000000002d82 dsc_addr = 0000000000000180 pkt length = 00000000000000c0
+[1726858.992025] 
+[1726858.992025]  
+[1726858.992051] 
+[1726858.992051] New Cycle:
+[1726858.992054] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726858.992057] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726858.992059] ADD: tx_int = ffff8800073f7180, VAL: tx_int = 1
+[1726858.992061] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726858.992064] 
+[1726858.992064] 
+[1726858.992064] New Cycle:
+[1726858.992067] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726858.992069] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726858.992071] ADD: tx_int = ffff8800073f71c0, VAL: tx_int = ffffffff
+[1726858.992073] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726858.992074] 
+[1726858.992074] 
+[1726858.992074] New Cycle:
+[1726858.992077] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726858.992080] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726858.992082] ADD: tx_int = ffff8800073f71c0, VAL: tx_int = ffffffff
+[1726858.992083] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726859.536049] 
+[1726859.536049] 
+[1726859.536049] New Cycle:
+[1726859.536054] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726859.536056] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726859.536058] ADD: tx_int = ffff8800073f71c0, VAL: tx_int = 1
+[1726859.536060] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726859.536063] 
+[1726859.536063] 
+[1726859.536063] New Cycle:
+[1726859.536066] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726859.536068] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726859.536070] ADD: tx_int = ffff8800073f7200, VAL: tx_int = ffffffff
+[1726859.536072] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726859.536074] 
+[1726859.536074] 
+[1726859.536074] New Cycle:
+[1726859.536077] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726859.536079] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726859.536081] ADD: tx_int = ffff8800073f7200, VAL: tx_int = ffffffff
+[1726859.536083] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726859.536027] dma_addr = 0000000098f00802, pkt_addr = 0000000000002e40 
+[1726859.536027] pkt_addr_fixed = 0000000000002e42 dsc_addr = 00000000000001c0 pkt length = 00000000000000c0
+[1726859.536027] 
+[1726859.536027]  
+[1726860.139963] dma_addr = 0000000120f0e202, pkt_addr = 0000000000002f00 
+[1726860.139963] pkt_addr_fixed = 0000000000002f02 dsc_addr = 0000000000000200 pkt length = 00000000000000c0
+[1726860.139963] 
+[1726860.139963]  
+[1726860.139988] 
+[1726860.139988] New Cycle:
+[1726860.139993] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726860.139995] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726860.139997] ADD: tx_int = ffff8800073f7200, VAL: tx_int = 1
+[1726860.139999] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726860.140002] 
+[1726860.140002] 
+[1726860.140002] New Cycle:
+[1726860.140005] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726860.140007] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726860.140009] ADD: tx_int = ffff8800073f7240, VAL: tx_int = ffffffff
+[1726860.140011] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726860.140013] 
+[1726860.140013] 
+[1726860.140013] New Cycle:
+[1726860.140016] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726860.140018] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726860.140020] ADD: tx_int = ffff8800073f7240, VAL: tx_int = ffffffff
+[1726860.140022] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726860.352102] 
+[1726860.352102] 
+[1726860.352102] New Cycle:
+[1726860.352106] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726860.352109] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726860.352111] ADD: tx_int = ffff8800073f7240, VAL: tx_int = 1
+[1726860.352113] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726860.352116] 
+[1726860.352116] 
+[1726860.352116] New Cycle:
+[1726860.352119] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726860.352121] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726860.352123] ADD: tx_int = ffff8800073f7280, VAL: tx_int = ffffffff
+[1726860.352125] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726860.352127] 
+[1726860.352127] 
+[1726860.352127] New Cycle:
+[1726860.352130] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726860.352132] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726860.352134] ADD: tx_int = ffff8800073f7280, VAL: tx_int = ffffffff
+[1726860.352136] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726860.352079] dma_addr = 0000000098f02002, pkt_addr = 0000000000002fc0 
+[1726860.352079] pkt_addr_fixed = 0000000000002fc2 dsc_addr = 0000000000000240 pkt length = 0000000000000080
+[1726860.352079] 
+[1726860.352079]  
+[1726862.085157] dma_addr = 0000000120f0d60a, pkt_addr = 0000000000003040 
+[1726862.085157] pkt_addr_fixed = 000000000000304a dsc_addr = 0000000000000280 pkt length = 00000000000000c0
+[1726862.085157] 
+[1726862.085157]  
+[1726862.085185] 
+[1726862.085185] New Cycle:
+[1726862.085189] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726862.085191] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726862.085193] ADD: tx_int = ffff8800073f7280, VAL: tx_int = 1
+[1726862.085195] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726862.085199] 
+[1726862.085199] 
+[1726862.085199] New Cycle:
+[1726862.085202] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726862.085204] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726862.085206] ADD: tx_int = ffff8800073f72c0, VAL: tx_int = ffffffff
+[1726862.085208] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726862.085210] 
+[1726862.085210] 
+[1726862.085210] New Cycle:
+[1726862.085213] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726862.085215] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726862.085217] ADD: tx_int = ffff8800073f72c0, VAL: tx_int = ffffffff
+[1726862.085219] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726863.000099] 
+[1726863.000099] 
+[1726863.000099] New Cycle:
+[1726863.000103] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726863.000106] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726863.000108] ADD: tx_int = ffff8800073f72c0, VAL: tx_int = 1
+[1726863.000110] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726863.000113] 
+[1726863.000113] 
+[1726863.000113] New Cycle:
+[1726863.000116] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726863.000118] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726863.000120] ADD: tx_int = ffff8800073f7300, VAL: tx_int = ffffffff
+[1726863.000122] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726863.000124] 
+[1726863.000124] 
+[1726863.000124] New Cycle:
+[1726863.000127] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726863.000129] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726863.000131] ADD: tx_int = ffff8800073f7300, VAL: tx_int = ffffffff
+[1726863.000132] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726863.000075] dma_addr = 000000000bb04202, pkt_addr = 0000000000003100 
+[1726863.000075] pkt_addr_fixed = 0000000000003102 dsc_addr = 00000000000002c0 pkt length = 00000000000000c0
+[1726863.000075] 
+[1726863.000075]  
+[1726863.072080] dma_addr = 0000000120266002, pkt_addr = 00000000000031c0 
+[1726863.072080] pkt_addr_fixed = 00000000000031c2 dsc_addr = 0000000000000300 pkt length = 00000000000000c0
+[1726863.072080] 
+[1726863.072080]  
+[1726863.072106] 
+[1726863.072106] New Cycle:
+[1726863.072111] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726863.072113] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726863.072115] ADD: tx_int = ffff8800073f7300, VAL: tx_int = 1
+[1726863.072117] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726863.072120] 
+[1726863.072120] 
+[1726863.072120] New Cycle:
+[1726863.072123] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726863.072125] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726863.072127] ADD: tx_int = ffff8800073f7340, VAL: tx_int = ffffffff
+[1726863.072129] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726863.072131] 
+[1726863.072131] 
+[1726863.072131] New Cycle:
+[1726863.072134] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726863.072136] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726863.072138] ADD: tx_int = ffff8800073f7340, VAL: tx_int = ffffffff
+[1726863.072140] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726868.145789] 
+[1726868.145789] 
+[1726868.145789] New Cycle:
+[1726868.145794] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726868.145797] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726868.145799] ADD: tx_int = ffff8800073f7340, VAL: tx_int = 1
+[1726868.145801] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726868.145805] 
+[1726868.145805] 
+[1726868.145805] New Cycle:
+[1726868.145808] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726868.145811] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726868.145813] ADD: tx_int = ffff8800073f7380, VAL: tx_int = ffffffff
+[1726868.145814] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726868.145816] 
+[1726868.145816] 
+[1726868.145816] New Cycle:
+[1726868.145819] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726868.145821] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726868.145823] ADD: tx_int = ffff8800073f7380, VAL: tx_int = ffffffff
+[1726868.145825] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726870.087040] 
+[1726870.087040] 
+[1726870.087040] New Cycle:
+[1726870.087044] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726870.087047] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726870.087049] ADD: tx_int = ffff8800073f7380, VAL: tx_int = 1
+[1726870.087051] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726870.087054] 
+[1726870.087054] 
+[1726870.087054] New Cycle:
+[1726870.087057] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726870.087059] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726870.087061] ADD: tx_int = ffff8800073f73c0, VAL: tx_int = ffffffff
+[1726870.087063] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff
+[1726870.087065] 
+[1726870.087065] 
+[1726870.087065] New Cycle:
+[1726870.087068] ADD: tx_ring->host_tx_dne_ptr ffff8800073f7000, VAL: tx_ring->host_tx_dne_ptr ffffffff
+[1726870.087070] ADD: rx_ring->host_rx_dne_ptr ffff88000706c000, VAL: rx_ring->host_rx_dne_ptr 0000000000000000
+[1726870.087072] ADD: tx_int = ffff8800073f73c0, VAL: tx_int = ffffffff
+[1726870.087074] ADD: rx_int = ffff88000706c038, VAL: tx_int = ffffffffffffffff

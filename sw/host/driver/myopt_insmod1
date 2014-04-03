@@ -1,0 +1,77 @@
+[289122.143825] nf10: module loaded
+[289122.143862] nf10 0000:01:00.0: PCI INT A -> GSI 16 (level, low) -> IRQ 16
+[289122.143869] nf10 0000:01:00.0: setting latency timer to 64
+[289122.143916] nf10 0000:01:00.0: irq 52 for MSI/MSI-X
+[289122.143923] nf10: Reserving memory region for NF10
+[289122.143927] nf10: mapping cfg memory
+[289122.143960] nf10: mapping mem memory
+[289122.146071] 
+[289122.146072] Virtual address of TX buffer = ffff88003e976000, physical address of TX buffer = 000000003e976000
+[289122.146074] 
+[289122.146074] Virtual address of RX buffer = ffff88003e975000, physical address of RX buffer = 000000003e975000
+[289122.146077] nf10_probe: Add: ffff88003e976000 Val: ffffffff
+[289122.146078] nf10_probe: Add: ffff88003e976040 Val: ffffffff
+[289122.146080] nf10_probe: Add: ffff88003e976080 Val: ffffffff
+[289122.146081] nf10_probe: Add: ffff88003e9760c0 Val: ffffffff
+[289122.146083] nf10_probe: Add: ffff88003e976100 Val: ffffffff
+[289122.146084] nf10_probe: Add: ffff88003e976140 Val: ffffffff
+[289122.146086] nf10_probe: Add: ffff88003e976180 Val: ffffffff
+[289122.146087] nf10_probe: Add: ffff88003e9761c0 Val: ffffffff
+[289122.146089] nf10_probe: Add: ffff88003e976200 Val: ffffffff
+[289122.146090] nf10_probe: Add: ffff88003e976240 Val: ffffffff
+[289122.146092] nf10_probe: Add: ffff88003e976280 Val: ffffffff
+[289122.146093] nf10_probe: Add: ffff88003e9762c0 Val: ffffffff
+[289122.146095] nf10_probe: Add: ffff88003e976300 Val: ffffffff
+[289122.146096] nf10_probe: Add: ffff88003e976340 Val: ffffffff
+[289122.146098] nf10_probe: Add: ffff88003e976380 Val: ffffffff
+[289122.146099] nf10_probe: Add: ffff88003e9763c0 Val: ffffffff
+[289122.146101] nf10_probe: Add: ffff88003e976400 Val: ffffffff
+[289122.146102] nf10_probe: Add: ffff88003e976440 Val: ffffffff
+[289122.146104] nf10_probe: Add: ffff88003e976480 Val: ffffffff
+[289122.146105] nf10_probe: Add: ffff88003e9764c0 Val: ffffffff
+[289122.146107] nf10_probe: Add: ffff88003e976500 Val: ffffffff
+[289122.146108] nf10_probe: Add: ffff88003e976540 Val: ffffffff
+[289122.146110] nf10_probe: Add: ffff88003e976580 Val: ffffffff
+[289122.146112] nf10_probe: Add: ffff88003e9765c0 Val: ffffffff
+[289122.146113] nf10_probe: Add: ffff88003e976600 Val: ffffffff
+[289122.146115] nf10_probe: Add: ffff88003e976640 Val: ffffffff
+[289122.146116] nf10_probe: Add: ffff88003e976680 Val: ffffffff
+[289122.146118] nf10_probe: Add: ffff88003e9766c0 Val: ffffffff
+[289122.146119] nf10_probe: Add: ffff88003e976700 Val: ffffffff
+[289122.146120] nf10_probe: Add: ffff88003e976740 Val: ffffffff
+[289122.146122] nf10_probe: Add: ffff88003e976780 Val: ffffffff
+[289122.146123] nf10_probe: Add: ffff88003e9767c0 Val: ffffffff
+[289122.146125] nf10_probe: Add: ffff88003e975038  Val: ffffffffffffffff
+[289122.146127] nf10_probe: Add: ffff88003e975078  Val: ffffffffffffffff
+[289122.146128] nf10_probe: Add: ffff88003e9750b8  Val: ffffffffffffffff
+[289122.146130] nf10_probe: Add: ffff88003e9750f8  Val: ffffffffffffffff
+[289122.146132] nf10_probe: Add: ffff88003e975138  Val: ffffffffffffffff
+[289122.146133] nf10_probe: Add: ffff88003e975178  Val: ffffffffffffffff
+[289122.146135] nf10_probe: Add: ffff88003e9751b8  Val: ffffffffffffffff
+[289122.146136] nf10_probe: Add: ffff88003e9751f8  Val: ffffffffffffffff
+[289122.146138] nf10_probe: Add: ffff88003e975238  Val: ffffffffffffffff
+[289122.146140] nf10_probe: Add: ffff88003e975278  Val: ffffffffffffffff
+[289122.146141] nf10_probe: Add: ffff88003e9752b8  Val: ffffffffffffffff
+[289122.146143] nf10_probe: Add: ffff88003e9752f8  Val: ffffffffffffffff
+[289122.146144] nf10_probe: Add: ffff88003e975338  Val: ffffffffffffffff
+[289122.146146] nf10_probe: Add: ffff88003e975378  Val: ffffffffffffffff
+[289122.146148] nf10_probe: Add: ffff88003e9753b8  Val: ffffffffffffffff
+[289122.146149] nf10_probe: Add: ffff88003e9753f8  Val: ffffffffffffffff
+[289122.146151] nf10_probe: Add: ffff88003e975438  Val: ffffffffffffffff
+[289122.146152] nf10_probe: Add: ffff88003e975478  Val: ffffffffffffffff
+[289122.146154] nf10_probe: Add: ffff88003e9754b8  Val: ffffffffffffffff
+[289122.146155] nf10_probe: Add: ffff88003e9754f8  Val: ffffffffffffffff
+[289122.146157] nf10_probe: Add: ffff88003e975538  Val: ffffffffffffffff
+[289122.146159] nf10_probe: Add: ffff88003e975578  Val: ffffffffffffffff
+[289122.146160] nf10_probe: Add: ffff88003e9755b8  Val: ffffffffffffffff
+[289122.146162] nf10_probe: Add: ffff88003e9755f8  Val: ffffffffffffffff
+[289122.146163] nf10_probe: Add: ffff88003e975638  Val: ffffffffffffffff
+[289122.146165] nf10_probe: Add: ffff88003e975678  Val: ffffffffffffffff
+[289122.146167] nf10_probe: Add: ffff88003e9756b8  Val: ffffffffffffffff
+[289122.146168] nf10_probe: Add: ffff88003e9756f8  Val: ffffffffffffffff
+[289122.146170] nf10_probe: Add: ffff88003e975738  Val: ffffffffffffffff
+[289122.146171] nf10_probe: Add: ffff88003e975778  Val: ffffffffffffffff
+[289122.146173] nf10_probe: Add: ffff88003e9757b8  Val: ffffffffffffffff
+[289122.146175] nf10_probe: Add: ffff88003e9757f8  Val: ffffffffffffffff
+[289122.146683] Allocating 000000000000001e receive descriptors
+[289122.146758] nf10: device ready

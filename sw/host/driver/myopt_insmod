@@ -1,0 +1,97 @@
+[1726821.029990] nf10: module loaded
+[1726821.030324] nf10 0000:01:00.0: irq 52 for MSI/MSI-X
+[1726821.030336] nf10: Reserving memory region for NF10
+[1726821.030341] nf10: mapping cfg memory
+[1726821.030352] nf10: mapping mem memory
+[1726821.030566] TX_DSC addr: ffffc90021100000   RX_DSC addr: ffffc90021280000
+[1726821.036083] 
+[1726821.036083] Virtual address of TX buffer = ffff8800073f7000, physical address of TX buffer = 00000000073f7000
+[1726821.036086] 
+[1726821.036086] Virtual address of RX buffer = ffff88000706c000, physical address of RX buffer = 000000000706c000
+[1726821.036089] nf10_probe: Add: ffff8800073f7000 Val: ffffffff
+[1726821.036091] nf10_probe: Add: ffff8800073f7040 Val: ffffffff
+[1726821.036093] nf10_probe: Add: ffff8800073f7080 Val: ffffffff
+[1726821.036095] nf10_probe: Add: ffff8800073f70c0 Val: ffffffff
+[1726821.036097] nf10_probe: Add: ffff8800073f7100 Val: ffffffff
+[1726821.036099] nf10_probe: Add: ffff8800073f7140 Val: ffffffff
+[1726821.036101] nf10_probe: Add: ffff8800073f7180 Val: ffffffff
+[1726821.036103] nf10_probe: Add: ffff8800073f71c0 Val: ffffffff
+[1726821.036105] nf10_probe: Add: ffff8800073f7200 Val: ffffffff
+[1726821.036107] nf10_probe: Add: ffff8800073f7240 Val: ffffffff
+[1726821.036109] nf10_probe: Add: ffff8800073f7280 Val: ffffffff
+[1726821.036111] nf10_probe: Add: ffff8800073f72c0 Val: ffffffff
+[1726821.036113] nf10_probe: Add: ffff8800073f7300 Val: ffffffff
+[1726821.036115] nf10_probe: Add: ffff8800073f7340 Val: ffffffff
+[1726821.036117] nf10_probe: Add: ffff8800073f7380 Val: ffffffff
+[1726821.036118] nf10_probe: Add: ffff8800073f73c0 Val: ffffffff
+[1726821.036120] nf10_probe: Add: ffff8800073f7400 Val: ffffffff
+[1726821.036122] nf10_probe: Add: ffff8800073f7440 Val: ffffffff
+[1726821.036124] nf10_probe: Add: ffff8800073f7480 Val: ffffffff
+[1726821.036126] nf10_probe: Add: ffff8800073f74c0 Val: ffffffff
+[1726821.036128] nf10_probe: Add: ffff8800073f7500 Val: ffffffff
+[1726821.036130] nf10_probe: Add: ffff8800073f7540 Val: ffffffff
+[1726821.036132] nf10_probe: Add: ffff8800073f7580 Val: ffffffff
+[1726821.036134] nf10_probe: Add: ffff8800073f75c0 Val: ffffffff
+[1726821.036136] nf10_probe: Add: ffff8800073f7600 Val: ffffffff
+[1726821.036138] nf10_probe: Add: ffff8800073f7640 Val: ffffffff
+[1726821.036140] nf10_probe: Add: ffff8800073f7680 Val: ffffffff
+[1726821.036142] nf10_probe: Add: ffff8800073f76c0 Val: ffffffff
+[1726821.036144] nf10_probe: Add: ffff8800073f7700 Val: ffffffff
+[1726821.036146] nf10_probe: Add: ffff8800073f7740 Val: ffffffff
+[1726821.036148] nf10_probe: Add: ffff8800073f7780 Val: ffffffff
+[1726821.036150] nf10_probe: Add: ffff8800073f77c0 Val: ffffffff
+[1726821.036152] nf10_probe: Add: ffff88000706c038  Val: ffffffffffffffff
+[1726821.036154] nf10_probe: Add: ffff88000706c078  Val: ffffffffffffffff
+[1726821.036156] nf10_probe: Add: ffff88000706c0b8  Val: ffffffffffffffff
+[1726821.036158] nf10_probe: Add: ffff88000706c0f8  Val: ffffffffffffffff
+[1726821.036159] nf10_probe: Add: ffff88000706c138  Val: ffffffffffffffff
+[1726821.036161] nf10_probe: Add: ffff88000706c178  Val: ffffffffffffffff
+[1726821.036163] nf10_probe: Add: ffff88000706c1b8  Val: ffffffffffffffff
+[1726821.036165] nf10_probe: Add: ffff88000706c1f8  Val: ffffffffffffffff
+[1726821.036167] nf10_probe: Add: ffff88000706c238  Val: ffffffffffffffff
+[1726821.036168] nf10_probe: Add: ffff88000706c278  Val: ffffffffffffffff
+[1726821.036170] nf10_probe: Add: ffff88000706c2b8  Val: ffffffffffffffff
+[1726821.036172] nf10_probe: Add: ffff88000706c2f8  Val: ffffffffffffffff
+[1726821.036174] nf10_probe: Add: ffff88000706c338  Val: ffffffffffffffff
+[1726821.036176] nf10_probe: Add: ffff88000706c378  Val: ffffffffffffffff
+[1726821.036178] nf10_probe: Add: ffff88000706c3b8  Val: ffffffffffffffff
+[1726821.036179] nf10_probe: Add: ffff88000706c3f8  Val: ffffffffffffffff
+[1726821.036181] nf10_probe: Add: ffff88000706c438  Val: ffffffffffffffff
+[1726821.036183] nf10_probe: Add: ffff88000706c478  Val: ffffffffffffffff
+[1726821.036185] nf10_probe: Add: ffff88000706c4b8  Val: ffffffffffffffff
+[1726821.036187] nf10_probe: Add: ffff88000706c4f8  Val: ffffffffffffffff
+[1726821.036189] nf10_probe: Add: ffff88000706c538  Val: ffffffffffffffff
+[1726821.036190] nf10_probe: Add: ffff88000706c578  Val: ffffffffffffffff
+[1726821.036192] nf10_probe: Add: ffff88000706c5b8  Val: ffffffffffffffff
+[1726821.036194] nf10_probe: Add: ffff88000706c5f8  Val: ffffffffffffffff
+[1726821.036196] nf10_probe: Add: ffff88000706c638  Val: ffffffffffffffff
+[1726821.036198] nf10_probe: Add: ffff88000706c678  Val: ffffffffffffffff
+[1726821.036200] nf10_probe: Add: ffff88000706c6b8  Val: ffffffffffffffff
+[1726821.036202] nf10_probe: Add: ffff88000706c6f8  Val: ffffffffffffffff
+[1726821.036203] nf10_probe: Add: ffff88000706c738  Val: ffffffffffffffff
+[1726821.036205] nf10_probe: Add: ffff88000706c778  Val: ffffffffffffffff
+[1726821.036207] nf10_probe: Add: ffff88000706c7b8  Val: ffffffffffffffff
+[1726821.036209] nf10_probe: Add: ffff88000706c7f8  Val: ffffffffffffffff
+[1726821.036846] Allocating 000000000000001e receive descriptors
+[1726821.036850] Using my changed
+[1726821.036852] Using my changed
+[1726821.036854] Using my changed
+[1726821.036855] Using my changed
+[1726821.036857] Using my changed
+[1726821.036859] Using my changed
+[1726821.036861] Using my changed
+[1726821.036863] Using my changed
+[1726821.036864] Using my changed
+[1726821.036866] Using my changed
+[1726821.036868] Using my changed
+[1726821.036870] Using my changed
+[1726821.036872] Using my changed
+[1726821.036874] Using my changed
+[1726821.036877] Using my changed
+[1726821.036879] Using my changed
+[1726821.036881] Using my changed
+[1726821.036882] Using my changed
+[1726821.036884] Using my changed
+[1726821.036886] Using my changed
+[1726821.036888] Using my changed
+[1726821.040327] nf10: device ready
