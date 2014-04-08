@@ -135,10 +135,10 @@ int nf10priv_xmit(struct nf10_card *card, struct sk_buff *skb, int port){
     // packet buffer management
     spin_lock_irqsave(&tx_lock, flags);
 
-    if(nf10_tx_csum(card->tx_ring, skb) == 0){
+    /*if(nf10_tx_csum(card->tx_ring, skb) == 0){
 	printk("Returning -1 because PARTIAL is not set");
 	return -1;
-    }
+    }*/
 
     ip_header = (struct iphdr *)skb_network_header(skb);
     if(!ip_header){

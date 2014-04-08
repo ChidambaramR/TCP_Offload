@@ -39,7 +39,7 @@
 #ifndef NF10IFACE_H
 #define NF10IFACE_H
 
-#include <linux/fs.h>
+//#include <linux/fs.h>
 #include "nf10driver.h"
 
 #define MTU 1500

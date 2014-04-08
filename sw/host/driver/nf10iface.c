@@ -172,10 +172,10 @@ int nf10iface_probe(struct pci_dev *pdev, struct nf10_card *card){
         ((struct nf10_ndev_priv*)netdev_priv(netdev))->port_num = i;
         ((struct nf10_ndev_priv*)netdev_priv(netdev))->port_up  = 0;
 	
-	//netdev->features = NETIF_F_HW_CSUM | NETIF_F_RXCSUM;
+	netdev->features = NETIF_F_HW_CSUM | NETIF_F_RXCSUM;
 	//netdev->features |= netdev->hw_features;
-	//netdev->hw_features |= NETIF_F_RXCSUM;
-	//netdev->vlan_features = NETIF_F_HW_CSUM;
+	netdev->hw_features |= NETIF_F_RXCSUM;
+	netdev->vlan_features = NETIF_F_HW_CSUM;
 	//*/
 
         // assign some made up MAC adddr

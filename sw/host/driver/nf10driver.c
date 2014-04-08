@@ -44,6 +44,7 @@
 #include <linux/init.h>
 #include <linux/stat.h>
 #include <linux/pci.h>
+
 #include "nf10driver.h"
 #include "nf10fops.h"
 #include "nf10iface.h"
@@ -64,6 +65,27 @@
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Mario Flajslik");
 MODULE_DESCRIPTION("nf10 nic driver");
+
+#define PROCFS_MAX_SIZE 1024
+#define PROCFS_NAME  "nf10"
+
+
+/*int pcrocfile_read(struct file *file, char *buf, size_t count, loff_t *offp){
+	char msg[30]="Hello world";
+	int len = strlen(msg);
+	int temp = len;
+
+	temp = temp - count;
+	copy_to_user(buf, msg, count);
+	if(count == 0)
+		temp = len;
+
+	return count;
+}
+
+struct file_operations proc_fops = {
+	.read = procfile_read
+};*/
 
 static struct pci_device_id pci_id[] = {
     {PCI_DEVICE(PCI_VENDOR_ID_NF10, PCI_DEVICE_ID_NF10)},
@@ -429,9 +451,17 @@ static struct pci_driver pci_driver = {
     .err_handler = &pcie_err_handlers
 };
 
+
+
+/*int procfile_write(struct file *file, const char *buffer, unsigned long count, void *data){
+	return 1;
+}*/
+
+
 static int __init nf10_init(void)
 {
 	printk(KERN_INFO "nf10: module loaded\n");
+	printk(KERN_ALERT "/proc/%s created\n", PROCFS_NAME);
 	return pci_register_driver(&pci_driver);
 }
 
