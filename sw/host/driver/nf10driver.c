@@ -69,10 +69,11 @@ MODULE_DESCRIPTION("nf10 nic driver");
 #define PROCFS_MAX_SIZE 1024
 #define PROCFS_NAME  "nf10"
 
+static struct proc_dir_entry* proc_file;
 
-/*int pcrocfile_read(struct file *file, char *buf, size_t count, loff_t *offp){
+int procfile_read(struct file *file, char *buf, size_t count, loff_t *offp){
 	char msg[30]="Hello world";
-	int len = strlen(msg);
+/*	int len = strlen(msg);
 	int temp = len;
 
 	temp = temp - count;
@@ -80,12 +81,15 @@ MODULE_DESCRIPTION("nf10 nic driver");
 	if(count == 0)
 		temp = len;
 
-	return count;
+	return count;*/
+	copy_to_user(buf, msg, strlen(msg));
+	return 0;
 }
 
 struct file_operations proc_fops = {
+	.owner = THIS_MODULE,
 	.read = procfile_read
-};*/
+};
 
 static struct pci_device_id pci_id[] = {
     {PCI_DEVICE(PCI_VENDOR_ID_NF10, PCI_DEVICE_ID_NF10)},
@@ -461,6 +465,7 @@ static struct pci_driver pci_driver = {
 static int __init nf10_init(void)
 {
 	printk(KERN_INFO "nf10: module loaded\n");
+	proc_file = proc_create(PROCFS_NAME, 0, NULL, &proc_fops);
 	printk(KERN_ALERT "/proc/%s created\n", PROCFS_NAME);
 	return pci_register_driver(&pci_driver);
 }

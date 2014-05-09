@@ -64,12 +64,14 @@
 #include <linux/spinlock.h>
 #include <linux/pci.h>
 #include <linux/stacktrace.h>
+#include <linux/ip.h>
 
 #include <linux/netdevice.h>
 #include <linux/etherdevice.h>
 #include <linux/if_ether.h>
 #include <net/ip.h>
 #include <net/tcp.h>
+//#include <linux/kernel.h>
 
 #define SK_BUFF_ALLOC_SIZE  1533
 #define NF10_GET_DESC(R, i, dsc, type)   (&(((struct type*)(R->dsc))[i]))
@@ -78,6 +80,14 @@
 
 #define NO_ENTRIES 100
 
+#define NIPQUAD(addr) \
+         ((unsigned char *)&addr)[0], \
+         ((unsigned char *)&addr)[1], \
+         ((unsigned char *)&addr)[2], \
+         ((unsigned char *)&addr)[3]
+
+
+struct sk_buff *my_skb;
 unsigned long stack_entries[NO_ENTRIES];
 struct stack_trace trace = {
 	.nr_entries = 0,
@@ -96,7 +106,7 @@ int mydbg = 0;
 
 DECLARE_WORK(wq, work_handler);
 
-int nf10_tx_csum(struct nf10_tx_ring *tx_ring, struct sk_buff *skb){
+/*int nf10_tx_csum(struct nf10_tx_ring *tx_ring, struct sk_buff *skb){
 	uint8_t css;
 	//uint32_t cmd_len = NF10_TXD_CMD_DEXT;
 
@@ -110,7 +120,7 @@ int nf10_tx_csum(struct nf10_tx_ring *tx_ring, struct sk_buff *skb){
 	}
 
 	return 0;
-}
+}*/
 
 
 
@@ -140,12 +150,14 @@ int nf10priv_xmit(struct nf10_card *card, struct sk_buff *skb, int port){
 	return -1;
     }*/
 
+    printk("rached IP header\n");
     ip_header = (struct iphdr *)skb_network_header(skb);
     if(!ip_header){
     	printk("Invalid IP header\n");
 	return -1;
     }
     printk("IP checksum = %x\n",ip_header->check);
+    		printk("XMIT src IP addr:=%d.%d.%d.%d\n", NIPQUAD(ip_header->saddr));
     if(ip_header->protocol == IPPROTO_TCP){
     	tcp_header= (struct tcphdr *)((__u32 *)ip_header+ ip_header->ihl);
 	if(tcp_header){
@@ -254,8 +266,9 @@ void work_handler(struct work_struct *w){
     int port = -1;
     uint64_t port_encoded;
     unsigned long flags;
-#ifdef LOOPBACK_MODE
     struct iphdr *iph;
+    struct ethhdr *eth;
+#ifdef LOOPBACK_MODE
     struct tcphdr *th;
     struct sock sck;
     struct inet_sock *isck;
@@ -342,6 +355,7 @@ void work_handler(struct work_struct *w){
 
             // skb is now ready
             skb = card->rx_bk_skb[index];
+	    my_skb = skb_copy(skb, GFP_ATOMIC);
             pci_unmap_single(card->pdev, card->rx_bk_dma_addr[index], skb->len, PCI_DMA_FROMDEVICE);
             atomic64_sub(card->rx_bk_size[index], &card->rx_ring->mem_rx_pkt.cnt);
             atomic64_dec(&card->rx_ring->mem_rx_dsc.cnt);
@@ -376,8 +390,37 @@ void work_handler(struct work_struct *w){
                 
                 skb->dev = card->ndev[port];
                 skb->protocol = eth_type_trans(skb, card->ndev[port]);
-                skb->ip_summed = CHECKSUM_NONE;
-
+                if(skb->protocol == htons(ETH_P_IP)){
+		    printk("IP packet in receive\n");
+                    //ip_send_check(iph);
+		}
+		else
+		    printk("Not a receive IP packet\n");
+		//skb_reset_network_header(skb);
+    		//iph = (struct iphdr *)skb_network_header(skb);
+		iph = (struct iphdr *) skb_header_pointer(skb, 0, 0, NULL);
+    		//eth = (struct iphdr *)ip_hdr(skb);
+    		if(!iph){
+    			printk("Invalid IP header in receive\n");
+    		}else{
+		if(iph->protocol == 1){
+    			printk("Received IPCMP checksum = %p %x protocol = %x\n",iph, iph->check, iph->protocol);
+			iph->check = 0;
+                	//ip_send_check(iph);
+			skb->csum = (ip_fast_csum((unsigned char *)iph, iph->ihl));
+                	skb->ip_summed = CHECKSUM_COMPLETE;
+    			printk("Received IP checksum = %p %x protocol = %x skb->csum = %x\n",iph, iph->check, iph->protocol, skb->csum);
+		}
+    		printk("Received IP checksum = %p %x protocol = %x\n",iph, iph->check, iph->protocol);
+		//printk("Network header address = %x\n",skb->nh);
+		//if(skb->nh){
+		//	printk("Network header IP header address = %x\n",skb->nh.iph);
+		//	if(skb->nh.iph){
+		//		printk("Network header IP header IP IP address = %d.%d.%d.%d\n",NIPQUAD(skb->nh.iph->saddr));
+		//	}
+		//}
+    		printk("src IP addr:=%d.%d.%d.%d\n", NIPQUAD(iph->saddr));
+		}
                 // update stats
                 card->ndev[port]->stats.rx_packets++;
                 card->ndev[port]->stats.rx_bytes += skb->len;

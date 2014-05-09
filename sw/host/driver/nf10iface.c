@@ -176,7 +176,7 @@ int nf10iface_probe(struct pci_dev *pdev, struct nf10_card *card){
 	//netdev->features |= netdev->hw_features;
 	netdev->hw_features |= NETIF_F_RXCSUM;
 	netdev->vlan_features = NETIF_F_HW_CSUM;
-	//*/
+	//
 
         // assign some made up MAC adddr
         memcpy(netdev->dev_addr, "\0NF10C0", ETH_ALEN);
